@@ -3,11 +3,14 @@ import React, {
   useEffect
 } from 'react';
 import { 
-  View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList
+  View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
+
+import { LineChart } from 'react-native-chart-kit';
+
 
 
 const App = () => {
@@ -115,6 +118,59 @@ const App = () => {
           </View>
         )}
       />
+      <LineChart
+        data={{
+          labels: data.map(item => item.date),
+          datasets: [
+            {
+              data: data.map(item => item.squat),
+              strokeWidth: 2,
+              label: 'Squat'
+            },
+            {
+              data: data.map(item => item.bench),
+              strokeWidth: 2,
+              label: 'Bench'
+            },
+            {
+              data: data.map(item => item.deadlift),
+              strokeWidth: 2,
+              label: 'Deadlift'
+            },
+            {
+              data: data.map(item => item.total),
+              strokeWidth: 2,
+              label: 'Total'
+            },
+          ],
+        }}
+        width={Dimensions.get("window").width}
+        height={220}
+        yAxisLabel={'kg'}
+        chartConfig={{
+          backgroundColor: "#e26a00",
+          backgroundGradientFrom: "#fb8c00",
+          backgroundGradientTo: "#ffa726",
+          decimalPlaces: 2,
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          style: {
+            borderRadius: 16
+          },
+          propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: "#ffa726"
+          }
+        }}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16
+        }}
+      />
+
+
     </View>
     
   );
@@ -142,12 +198,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#f2f2f2',
     margin: 5,
+    borderRadius: 5,
   },
   input: {
     height: 40,
     width: '80%',
     borderColor: 'gray',
     borderWidth: 1,
+    borderRadius: 5,
     padding: 10,
     marginBottom: 10,
   },
