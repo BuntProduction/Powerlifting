@@ -1,18 +1,35 @@
 import React, { 
-  useState 
+  useState,
+  useEffect
 } from 'react';
 import { 
   View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const App = () => {
+
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    AsyncStorage.getItem('data').then(data => {
+        if(data){
+          setData(JSON.parse(data));
+        }else{
+          setData([]);
+        }
+    });
+  }, []);
+
   const [squat, setSquat] = useState('');
   const [bench, setBench] = useState('');
   const [deadlift, setDeadlift] = useState('');
   const [total, setTotal] = useState(0);
-  const [data, setData] = useState([]);
+  
 
-  const handleTotal = () => {
+
+  const handleTotal = async () => {
 
     let date = new Date();
     date = date.toDateString();
@@ -23,13 +40,20 @@ const App = () => {
     
     const newTotal = squatValue + benchValue + deadliftValue;
     setTotal(newTotal);
-    setData([...data, { total: newTotal, date}]);
+
+    let newData = [...data, { total: newTotal, date }];
+    setData(newData);
+
+    await AsyncStorage.setItem('data', JSON.stringify(newData));
   }
   
 
-  const handleDelete = (date) => {
-    setData(data.filter(item => item.date !== date));
+  const handleDelete = async (date) => {
+    let updatedData = data.filter(item => item.date !== date);
+    setData(updatedData);
+    await AsyncStorage.setItem('data', JSON.stringify(updatedData));
   }
+
 
   return (
     <View style={styles.container}>
@@ -64,22 +88,22 @@ const App = () => {
           <Text style={styles.text}>Deadlift</Text>
           <Text style={styles.value}>{deadlift}</Text>
         </TouchableOpacity>
-        <View style={styles.totalContainer}>
+      </View>
+      <View style={styles.totalContainer}>
           <Text style={styles.totalText}>Total:</Text>
-          <Text style={styles.totalValue}>{total}</Text>
+          <Text style={styles.totalValue}>{total} kg</Text>
           <TouchableOpacity style={styles.totalButton} onPress={handleTotal}>
-            <Text style={styles.buttonText}>Add</Text>
+            <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
-      </View>
       <FlatList
         style={styles.flatlist}
         data={data}
         keyExtractor={item => item.date}
         renderItem={({ item }) => (
           <View style={styles.tableRow}>
-            <Text style={styles.tableCell}>{item.total}</Text>
-            <Text style={styles.tableCell}>{item.date}</Text>
+            <Text style={styles.tableCell1}>{item.total}</Text>
+            <Text style={styles.tableCell2}>{item.date}</Text>
             <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.date)}>
               <Text style={styles.buttonDelete}>Delete</Text>
             </TouchableOpacity>
@@ -90,6 +114,8 @@ const App = () => {
     
   );
 };
+
+// STYLE PART //
 
 const styles = StyleSheet.create({
   container: {
@@ -105,12 +131,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   square: {
-    width: '20%',
+    width: '30%',
     aspectRatio: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f2f2f2',
-    margin: 10,
+    margin: 5,
   },
   input: {
     height: 40,
@@ -166,7 +192,12 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 20,
   },
-  tableCell: {
+  tableCell1: {
+    width: '40%',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  tableCell2: {
     width: '40%',
     textAlign: 'center',
     fontSize: 16,
