@@ -6,6 +6,8 @@ import {
   View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const App = () => {
@@ -41,15 +43,15 @@ const App = () => {
     const newTotal = squatValue + benchValue + deadliftValue;
     setTotal(newTotal);
 
-    let newData = [...data, { total: newTotal, date }];
+    let newData = [...data, { squat: squatValue, bench: benchValue, deadlift: deadliftValue, total: newTotal, date, id: uuidv4() }];
     setData(newData);
 
     await AsyncStorage.setItem('data', JSON.stringify(newData));
   }
   
 
-  const handleDelete = async (date) => {
-    let updatedData = data.filter(item => item.date !== date);
+  const handleDelete = async (id) => {
+    let updatedData = data.filter(item => item.id !== id);
     setData(updatedData);
     await AsyncStorage.setItem('data', JSON.stringify(updatedData));
   }
@@ -99,12 +101,15 @@ const App = () => {
       <FlatList
         style={styles.flatlist}
         data={data}
-        keyExtractor={item => item.date}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.tableRow}>
-            <Text style={styles.tableCell1}>{item.total}</Text>
+            <Text style={styles.tableCell}>{item.squat}</Text>
+            <Text style={styles.tableCell}>{item.bench}</Text>
+            <Text style={styles.tableCell}>{item.deadlift}</Text>
+            <Text style={styles.tableCell1}>{item.total} kg</Text>
             <Text style={styles.tableCell2}>{item.date}</Text>
-            <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.date)}>
+            <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
               <Text style={styles.buttonDelete}>Delete</Text>
             </TouchableOpacity>
           </View>
