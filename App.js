@@ -3,7 +3,7 @@ import React, {
   useEffect
 } from 'react';
 import { 
-  View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions
+  View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions, Image
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-get-random-values';
@@ -17,6 +17,7 @@ import { LineChart } from 'react-native-chart-kit';
 const App = () => {
 
   const [data, setData] = useState([]);
+  const reversedData = data.slice().reverse();
   const [showLineChart, setShowLineChart] = useState(false);
 
   
@@ -54,6 +55,7 @@ const App = () => {
     let newData = [...data, { squat: squatValue, bench: benchValue, deadlift: deadliftValue, total: newTotal, date, id: uuidv4() }];
     setData(newData);
 
+
     await AsyncStorage.setItem('data', JSON.stringify(newData));
   }
   
@@ -67,6 +69,13 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <Image source={
+        require('./img/sbdlogo.png')} 
+        style={{  width: 100,
+                  height: 100,
+                  resizeMode: 'contain',
+              }}/>
+      
       <View style={styles.squaresContainer}>
         <TouchableOpacity style={styles.square} onPress={() => alert('Enter squat value')}>
           <TextInput
@@ -106,15 +115,24 @@ const App = () => {
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.tableRow}>
+            <Text style={styles.tableCell}>Squat</Text>
+            <Text style={styles.tableCell}>Bench</Text>
+            <Text style={styles.tableCell}>Deadlift</Text>
+            <Text style={styles.tableCell}>Total</Text>
+            <Text style={styles.tableCell}>Date</Text>
+            <Text style={styles.tableCell2}>                   </Text>
+          </View>
       <FlatList
+        contentContainerStyle={{ alignItems: 'flex-end',}}
         style={styles.flatlist}
-        data={data}
+        data={reversedData}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <View style={styles.tableRow}>
-            <Text style={styles.tableCell}>{item.squat}</Text>
-            <Text style={styles.tableCell}>{item.bench}</Text>
-            <Text style={styles.tableCell}>{item.deadlift}</Text>
+            <Text style={styles.tableCell}>{item.squat} kg </Text>
+            <Text style={styles.tableCell}>{item.bench} kg </Text>
+            <Text style={styles.tableCell}>{item.deadlift} kg </Text>
             <Text style={styles.tableCell1}>{item.total} kg</Text>
             <Text style={styles.tableCell2}>{item.date}</Text>
             <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
@@ -124,6 +142,7 @@ const App = () => {
         )}
       />
       <View>
+
         {showLineChart && 
       <LineChart
         data={{
@@ -162,7 +181,7 @@ const App = () => {
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           style: {
-            borderRadius: 16
+            borderRadius: 16,
           },
           propsForDots: {
             r: "6",
@@ -173,7 +192,8 @@ const App = () => {
         bezier
         style={{
           marginVertical: 8,
-          borderRadius: 16
+          marginBottom: '17%',
+          borderRadius: 10,
         }}
       />}
       </View>
@@ -190,7 +210,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '20%'
+    marginTop: '7%'
   },
   squaresContainer: {
     flexDirection: 'row',
@@ -226,6 +246,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   totalContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
@@ -236,9 +257,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   totalValue: {
+    margin: 10,
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 10,
   },
   totalButton: {
     backgroundColor: '#4CAF50',
@@ -250,33 +271,39 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  deleteButton: {
+
+  },
   buttonDelete: {
     color: 'red',
   },
   tableRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     padding: 10,
-    marginTop: 20,
+    marginTop: 10,
+    width: '100%',
+    
+  },
+  tableCell:{
+    padding: 5,
+    fontSize: 16,
   },
   tableCell1: {
-    width: '40%',
     textAlign: 'center',
     fontSize: 20,
   },
   tableCell2: {
-    width: '40%',
     textAlign: 'center',
     fontSize: 16,
   },
   flatlist: {
     width: '100%',
-    margin: 10,
-    
-  }
+    marginTop: -3,
+  },
 });
 
 export default App;

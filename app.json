@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Powerlifting v0.0.8.5",
+    "name": "Powerlifting v0.1",
     "slug": "Powerlifting",
-    "version": "0.0.8.5",
+    "version": "0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
