@@ -11,9 +11,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { LineChart } from 'react-native-chart-kit';
 
-
-
-
 const App = () => {
 
   const [data, setData] = useState([]);
@@ -37,7 +34,46 @@ const App = () => {
   const [deadlift, setDeadlift] = useState('');
   const [total, setTotal] = useState(0);
   
+  useEffect(() => {
+    AsyncStorage.getItem('squat').then(value => {
+        if(value){
+          setSquat(value);
+        }
+    });
+    AsyncStorage.getItem('bench').then(value => {
+        if(value){
+          setBench(value);
+        }
+    });
+    AsyncStorage.getItem('deadlift').then(value => {
+        if(value){
+          setDeadlift(value);
+        }
+    });
+  }, []);
+  
+  useEffect(() => {
+    AsyncStorage.setItem('squat', squat);
+    AsyncStorage.setItem('bench', bench);
+    AsyncStorage.setItem('deadlift', deadlift);
+  }, [squat, bench, deadlift]);
 
+  //part to save the input to don't put again the values
+  const handleSquatChange = async (text) => {
+    setSquat(text);
+    await AsyncStorage.setItem('squat', text);
+  }
+
+  const handleBenchChange = async (text) => {
+    setBench(text);
+    await AsyncStorage.setItem('bench', text);
+  }
+
+  const handleDeadliftChange = async (text) => {
+    setDeadlift(text);
+    await AsyncStorage.setItem('deadlift', text);
+  }
+  //end of the part of the save oif the inputfield
 
   const handleTotal = async () => {
 
@@ -80,8 +116,8 @@ const App = () => {
         <TouchableOpacity style={styles.square} onPress={() => alert('Enter squat value')}>
           <TextInput
             style={styles.input}
-            onChangeText={text => setSquat(text)}
             value={squat}
+            onChangeText={handleSquatChange}
             keyboardType='numeric'
           />
           <Text style={styles.text}>Squat</Text>
@@ -90,7 +126,7 @@ const App = () => {
         <TouchableOpacity style={styles.square} onPress={() => alert('Enter bench value')}>
           <TextInput
             style={styles.input}
-            onChangeText={text => setBench(text)}
+            onChangeText={handleBenchChange}
             value={bench}
             keyboardType='numeric'
           />
@@ -100,7 +136,7 @@ const App = () => {
         <TouchableOpacity style={styles.square} onPress={() => alert('Enter deadlift value')}>
           <TextInput
             style={styles.input}
-            onChangeText={text => setDeadlift(text)}
+            onChangeText={handleDeadliftChange}
             value={deadlift}
             keyboardType='numeric'
           />
