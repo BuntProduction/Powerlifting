@@ -13,14 +13,18 @@ import { LineChart } from 'react-native-chart-kit';
 
 
 
+
 const App = () => {
 
   const [data, setData] = useState([]);
+  const [showLineChart, setShowLineChart] = useState(false);
+
   
   useEffect(() => {
     AsyncStorage.getItem('data').then(data => {
         if(data){
           setData(JSON.parse(data));
+          setShowLineChart(true);
         }else{
           setData([]);
         }
@@ -37,7 +41,8 @@ const App = () => {
   const handleTotal = async () => {
 
     let date = new Date();
-    date = date.toDateString();
+    let options = { day: 'numeric', month: 'numeric' };
+    date = date.toLocaleDateString('fr-FR', options);
 
     const squatValue = parseInt(squat) || 0;
     const benchValue = parseInt(bench) || 0;
@@ -118,6 +123,8 @@ const App = () => {
           </View>
         )}
       />
+      <View>
+        {showLineChart && 
       <LineChart
         data={{
           labels: data.map(item => item.date),
@@ -168,8 +175,8 @@ const App = () => {
           marginVertical: 8,
           borderRadius: 16
         }}
-      />
-
+      />}
+      </View>
 
     </View>
     
