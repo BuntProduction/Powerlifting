@@ -103,6 +103,21 @@ const App = () => {
   }
 
 
+  const squatInputRef = React.useRef(null);
+  const benchInputRef = React.useRef(null);
+  const deadliftInputRef = React.useRef(null);
+
+  const handleSquatPress = () => {
+    squatInputRef.current.focus();
+  };
+  const handleBenchPress = () => {
+    benchInputRef.current.focus();
+  };
+  const handleDeadliftPress = () => {
+    deadliftInputRef.current.focus();
+  };
+
+
   return (
     <View style={styles.container}>
       <Image source={
@@ -113,8 +128,9 @@ const App = () => {
               }}/>
       
       <View style={styles.squaresContainer}>
-        <TouchableOpacity style={styles.square} onPress={() => alert('Enter squat value')}>
+        <TouchableOpacity style={styles.square} onPress={handleSquatPress}>
           <TextInput
+            ref={squatInputRef}
             style={styles.input}
             value={squat}
             onChangeText={handleSquatChange}
@@ -123,8 +139,9 @@ const App = () => {
           <Text style={styles.text}>Squat</Text>
           <Text style={styles.value}>{squat}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.square} onPress={() => alert('Enter bench value')}>
+        <TouchableOpacity style={styles.square} onPress={handleBenchPress}>
           <TextInput
+            ref={benchInputRef}
             style={styles.input}
             onChangeText={handleBenchChange}
             value={bench}
@@ -133,8 +150,9 @@ const App = () => {
           <Text style={styles.text}>Bench</Text>
           <Text style={styles.value}>{bench}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.square} onPress={() => alert('Enter deadlift value')}>
+        <TouchableOpacity style={styles.square} onPress={handleDeadliftPress}>
           <TextInput
+            ref={deadliftInputRef}
             style={styles.input}
             onChangeText={handleDeadliftChange}
             value={deadlift}
@@ -208,19 +226,19 @@ const App = () => {
         }}
         width={Dimensions.get("window").width}
         height={220}
-        yAxisLabel={'kg'}
+        yAxisLabel={'kg '}
         chartConfig={{
           backgroundColor: "#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#ffa726",
-          decimalPlaces: 2,
+          backgroundGradientFrom: "#2e2e2e",
+          backgroundGradientTo: "#606061",
+          decimalPlaces: 0,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           style: {
             borderRadius: 16,
           },
           propsForDots: {
-            r: "6",
+            r: "5",
             strokeWidth: "2",
             stroke: "#ffa726"
           }
@@ -298,7 +316,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   totalButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#e26a00',
     padding: 10,
     borderRadius: 5,
   },
