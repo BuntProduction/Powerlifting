@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { Entypo } from '@expo/vector-icons';
 
 const HomeScreen = () => {
   const [squat, setSquat] = useState('');
@@ -28,8 +30,53 @@ const HomeScreen = () => {
     setTotal(newTotal);
   }, [squat, bench, deadlift]);
 
+
+  // Timer Part //
+  const [timeLeft, setTimeLeft] = useState(3 * 60); // 3 minutes in seconds
+  const [timerId, setTimerId] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const handlePlayPress = () => {
+    if (!isRunning) {
+      setIsRunning(true);
+      const id = setInterval(() => {
+        setTimeLeft(prevTime => prevTime - 1);
+        if (timeLeft <= 0) {
+          clearInterval(id);
+          setIsRunning(false);
+        }
+      }, 1000);
+      setTimerId(id);
+    }
+  };
+
+  const handleStopPress = () => {
+    clearInterval(timerId);
+    setIsRunning(false);
+  };
+  const handleResetPress = () => {
+    clearInterval(timerId);
+    setIsRunning(false);
+    setTimeLeft(3 * 60);
+  };
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
+
+  
+
   return (
     <View style={styles.container}>
+      <Image source={
+          require('./img/sbdlogo.png')} 
+          style={{  width: 100,
+                    height: 100,
+                    resizeMode: 'contain',
+                }}/>
       <View style={styles.inputView}>
       <View style={styles.square}>
         <TextInput
@@ -66,6 +113,19 @@ const HomeScreen = () => {
       <View style={styles.timerContainerContainer}>
       <View style={styles.timerContainer}>
         <Text style={styles.timerText}>Timer</Text>
+        
+        <Text style={styles.timerNumber}>{formattedTime}</Text>
+      <View style={styles.timerLogoContainer}>
+      <TouchableOpacity onPress={handlePlayPress} disabled={isRunning} style={styles.timerLogos}>
+        <Entypo name="controller-play" size={50} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleStopPress} disabled={!isRunning} style={styles.timerLogos}>
+        <Entypo name="controller-stop" size={50} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleResetPress} disabled={isRunning} style={styles.timerLogos}>
+        <Entypo name="ccw" size={50} color="black" />
+      </TouchableOpacity>
+      </View>
       </View>
       </View>
     </View>
@@ -79,7 +139,7 @@ const styles = StyleSheet.create({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#F5FCFF'
+  marginTop: '7%'
   },
   inputView:{
     flexDirection: 'row',
@@ -89,12 +149,13 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   square: {
-  width: '35%',
-  height: 150,
+  width: '40%',
+  height: '40%',
   backgroundColor: 'darkgray',
   alignItems: 'center',
   justifyContent: 'center',
   margin: 10,
+  borderRadius: 5,
   },
   input: {
   width: '80%',
@@ -113,8 +174,6 @@ const styles = StyleSheet.create({
   },
   timerContainer: {
   width: '100%',
-  height: 100,
-  backgroundColor: '#F5FCFF',
   alignItems: 'center',
   justifyContent: 'center',
   marginTop: 10,
@@ -126,6 +185,16 @@ const styles = StyleSheet.create({
   timerText: {
   fontSize: 30,
   fontWeight: 'bold',
+  },
+  timerNumber: {
+    fontSize: 50
+  },
+  timerLogoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  timerLogos: {
+    margin: 10
   }
   });
 export default HomeScreen;
