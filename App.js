@@ -11,13 +11,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { LineChart } from 'react-native-chart-kit';
 
+
 const App = () => {
+
 
   const [data, setData] = useState([]);
   const reversedData = data.slice().reverse();
   const [showLineChart, setShowLineChart] = useState(false);
 
-  
+
   useEffect(() => {
     AsyncStorage.getItem('data').then(data => {
         if(data){
@@ -117,9 +119,12 @@ const App = () => {
     deadliftInputRef.current.focus();
   };
 
-
+  
   return (
+
+    
     <View style={styles.container}>
+      
       <Image source={
         require('./img/sbdlogo.png')} 
         style={{  width: 100,
@@ -252,12 +257,21 @@ const App = () => {
       />}
       </View>
 
+
     </View>
     
   );
 };
 
-// STYLE PART //
+// STYLE PART ///////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 const styles = StyleSheet.create({
   container: {
