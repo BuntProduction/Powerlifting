@@ -4,8 +4,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Entypo } from '@expo/vector-icons';
 
+import { useWindowDimensions } from 'react-native';
+import StatusBar from './MyStatusBar';
 
+//design blanc avec une sorte de lévitation des carrés avec des shadows
 const HomeScreen = () => {
+  
+  const { width, height } = useWindowDimensions();
+  const squareSize = width * 0.4; // 40% of the window width
+
   const [squat, setSquat] = useState('');
   const [bench, setBench] = useState('');
   const [deadlift, setDeadlift] = useState('');
@@ -71,15 +78,17 @@ const HomeScreen = () => {
   
 
   return (
+    
     <View style={styles.container}>
+      <StatusBar />
       <Image source={
-          require('./img/sbdlogo.png')} 
-          style={{  width: 100,
-                    height: 100,
+          require('./img/LogoNoirNoBG.png')} 
+          style={{  width: 90,
+                    height: 90,
                     resizeMode: 'contain',
                 }}/>
       <View style={styles.inputView}>
-      <View style={styles.square}>
+      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
         <TextInput
           style={styles.input}
           value={squat}
@@ -88,7 +97,7 @@ const HomeScreen = () => {
         />
         <Text style={styles.text}>Squat</Text>
       </View>
-      <View style={styles.square}>
+      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
         <TextInput
           style={styles.input}
           value={bench}
@@ -97,7 +106,7 @@ const HomeScreen = () => {
         />
         <Text style={styles.text}>Bench</Text>
       </View>
-      <View style={styles.square}>
+      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
         <TextInput
           style={styles.input}
           value={deadlift}
@@ -106,7 +115,7 @@ const HomeScreen = () => {
         />
         <Text style={styles.text}>Deadlift</Text>
       </View>
-      <View style={styles.square}>
+      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
         <Text style={styles.text}>Total</Text>
         <Text style={styles.value}>{total ? total : '0 kg'}</Text>
       </View>
@@ -140,23 +149,30 @@ const styles = StyleSheet.create({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: '7%'
+  backgroundColor: 'white'
   },
   inputView:{
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignSelf: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    marginTop: 10
   },
   square: {
-  width: '40%',
-  height: '40%',
-  backgroundColor: 'darkgray',
+  shadowColor: 'black',
+  shadowOffset: { 
+    width: 0, 
+    height: 11 },
+  shadowOpacity: 0.16,
+  shadowRadius: 16,
+  elevation: 4,
+  backgroundColor: 'white',
   alignItems: 'center',
   justifyContent: 'center',
   margin: 10,
   borderRadius: 5,
+  
   },
   input: {
   width: '80%',
@@ -177,7 +193,7 @@ const styles = StyleSheet.create({
   width: '100%',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: 10,
+  marginTop: 20,
   },
   timerContainerContainer: {
     flex: 1,

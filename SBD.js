@@ -10,6 +10,8 @@ import React, {
   import { v4 as uuidv4 } from 'uuid';
   
   import { LineChart } from 'react-native-chart-kit';
+
+  import StatusBar from './MyStatusBar';
   
   
   //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
@@ -120,6 +122,7 @@ import React, {
     const handleDeadliftPress = () => {
       deadliftInputRef.current.focus();
     };
+    
   
     
     return (
@@ -128,9 +131,9 @@ import React, {
       <View style={styles.container}>
         
         <Image source={
-          require('./img/sbdlogo.png')} 
-          style={{  width: 100,
-                    height: 100,
+          require('./img/LogoNoirNoBG.png')} 
+          style={{  width: 90,
+                    height: 90,
                     resizeMode: 'contain',
                 }}/>
         
@@ -236,8 +239,8 @@ import React, {
           yAxisLabel={'kg '}
           chartConfig={{
             backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#2e2e2e",
-            backgroundGradientTo: "#606061",
+            backgroundGradientFrom: "#97A4B3",
+            backgroundGradientTo: "#97A4B3",
             decimalPlaces: 0,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -253,7 +256,7 @@ import React, {
           bezier
           style={{
             marginVertical: 8,
-            marginBottom: '17%',
+            marginBottom: '25%',
             borderRadius: 10,
           }}
         />}
@@ -279,7 +282,7 @@ import React, {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: '7%'
+      backgroundColor: 'white'
     },
     squaresContainer: {
       flexDirection: 'row',

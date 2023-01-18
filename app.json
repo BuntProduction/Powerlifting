@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Powerlifting v0.1.8",
+    "name": "Powerlifting v0.2.0",
     "slug": "Powerlifting",
-    "version": "0.1.8",
+    "version": "0.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#white"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,13 +18,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
+      "userInterfaceStyle": "automatic",
       "package": "com.bunt.Powerlifting"
     },
     "web": {
