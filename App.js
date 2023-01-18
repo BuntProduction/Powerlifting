@@ -10,6 +10,7 @@ import Weight from './Weight';
 import SettingsScreen from './SettingsScreen';
 //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
 const App = () => {
 
   const Tab = createBottomTabNavigator();

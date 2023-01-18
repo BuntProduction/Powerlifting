@@ -16,6 +16,7 @@ import React, {
   import StatusBar from './MyStatusBar';
   
   
+  
   //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
   
   const SBD = () => {

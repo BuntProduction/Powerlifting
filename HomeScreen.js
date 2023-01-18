@@ -7,6 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import { useWindowDimensions } from 'react-native';
 import StatusBar from './MyStatusBar';
 
+
 //design blanc avec une sorte de lévitation des carrés avec des shadows
 const HomeScreen = () => {
   
