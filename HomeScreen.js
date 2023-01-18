@@ -7,7 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import { useWindowDimensions } from 'react-native';
 import StatusBar from './MyStatusBar';
 
-
+TouchableOpacity.defaultProps = { activeOpacity: 0.75 };
 //design blanc avec une sorte de lévitation des carrés avec des shadows
 const HomeScreen = () => {
   
@@ -33,6 +33,25 @@ const HomeScreen = () => {
     setDeadlift(text);
     await AsyncStorage.setItem('deadlift', text);
   }
+
+  useEffect(() => {
+    AsyncStorage.getItem('squat').then(value => {
+        if(value){
+          setSquat(value);
+        }
+    });
+    AsyncStorage.getItem('bench').then(value => {
+        if(value){
+          setBench(value);
+        }
+    });
+    AsyncStorage.getItem('deadlift').then(value => {
+        if(value){
+          setDeadlift(value);
+        }
+    });
+  }, []);
+
 
   useEffect(() => {
     const newTotal = parseInt(squat) + parseInt(bench) + parseInt(deadlift);
@@ -76,7 +95,21 @@ const HomeScreen = () => {
     .toString()
     .padStart(2, '0')}`;
 
+    
+    const squatInputRef = React.useRef(null);
+    const benchInputRef = React.useRef(null);
+    const deadliftInputRef = React.useRef(null);
   
+    const handleSquatPress = () => {
+      squatInputRef.current.focus();
+    };
+    const handleBenchPress = () => {
+      benchInputRef.current.focus();
+    };
+    const handleDeadliftPress = () => {
+      deadliftInputRef.current.focus();
+    };
+
 
   return (
     
@@ -89,38 +122,59 @@ const HomeScreen = () => {
                     resizeMode: 'contain',
                 }}/>
       <View style={styles.inputView}>
-      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
+      <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleSquatPress}>
+      <Image source={
+          require('./img/Squat.png')} 
+          style={{  width: 120,
+                    height: 120,
+                    resizeMode: 'contain',
+                }}/>
         <TextInput
+          ref={squatInputRef}
           style={styles.input}
-          value={squat}
+          value={ squat }
           onChangeText={handleSquatChange}
           keyboardType='numeric'
         />
-        <Text style={styles.text}>Squat</Text>
-      </View>
-      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleBenchPress}>
+      <Image source={
+          require('./img/Bench.png')} 
+          style={{  width: 120,
+                    height: 120,
+                    resizeMode: 'contain',
+                }}/>
         <TextInput
+          ref={benchInputRef}
           style={styles.input}
-          value={bench}
+          value={ bench }
           onChangeText={handleBenchChange}
           keyboardType='numeric'
         />
-        <Text style={styles.text}>Bench</Text>
-      </View>
-      <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleDeadliftPress}>
+      <Image source={
+          require('./img/Deadlift.png')} 
+          style={{  width: 120,
+                    height: 120,
+                    resizeMode: 'contain',
+                }}/>
         <TextInput
+          ref={deadliftInputRef}
           style={styles.input}
-          value={deadlift}
+          value={ deadlift }
           onChangeText={handleDeadliftChange}
           keyboardType='numeric'
         />
-        <Text style={styles.text}>Deadlift</Text>
-      </View>
+      </TouchableOpacity>
+
       <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
         <Text style={styles.text}>Total</Text>
-        <Text style={styles.value}>{total ? total : '0 kg'}</Text>
+        <Text style={styles.value}>{total ? total : '0'} kg</Text>
       </View>
       </View>
+
       <View style={styles.timerContainerContainer}>
       <View style={styles.timerContainer}>
         <Text style={styles.timerText}>Timer</Text>
@@ -178,10 +232,10 @@ const styles = StyleSheet.create({
   input: {
   width: '80%',
   height: 40,
-  borderColor: 'gray',
-  borderWidth: 1,
   marginBottom: 10,
-  padding: 10,
+  fontSize: 36,
+  textAlign: 'center',
+  fontWeight: 'bold',
   },
   text: {
   fontSize: 20,

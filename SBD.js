@@ -155,11 +155,6 @@ import React, {
                     height: 90,
                     resizeMode: 'contain',
                 }}/>
-        <View>
-            <Text>Maximum squat: {extractMaxValues().squat}</Text>
-            <Text>Maximum bench: {extractMaxValues().bench}</Text>
-            <Text>Maximum deadlift: {extractMaxValues().deadlift}</Text>
-        </View>
         <View style={styles.squaresContainer}>
           <TouchableOpacity style={styles.square} onPress={handleSquatPress}>
             <TextInput
@@ -170,7 +165,7 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Squat</Text>
-            <Text style={styles.value}>{squat}</Text>
+            <Text style={styles.value}>Max: {extractMaxValues().squat}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleBenchPress}>
             <TextInput
@@ -181,7 +176,7 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Bench</Text>
-            <Text style={styles.value}>{bench}</Text>
+            <Text style={styles.value}>Max: {extractMaxValues().bench}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleDeadliftPress}>
             <TextInput
@@ -192,7 +187,7 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Deadlift</Text>
-            <Text style={styles.value}>{deadlift}</Text>
+            <Text style={styles.value}>Max: {extractMaxValues().deadlift}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.totalContainer}>
@@ -330,6 +325,7 @@ import React, {
       backgroundColor: 'white',
       margin: 5,
       borderRadius: 5,
+      activeOpacity: 1
     },
     input: {
       height: 40,
