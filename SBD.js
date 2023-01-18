@@ -233,7 +233,7 @@ import React, {
               <Text style={styles.tableCell1}>{item.total} kg</Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-              <MaterialIcons name="delete" size={24} color="red" />
+                <MaterialIcons name="delete" size={24} color="red" />
               </TouchableOpacity>
             </View>
           )}
@@ -322,7 +322,7 @@ import React, {
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 15
+      marginTop: 15,
       
     },
     square: {

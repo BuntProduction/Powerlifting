@@ -12,6 +12,8 @@ import React, {
   import { LineChart } from 'react-native-chart-kit';
 
   import StatusBar from './MyStatusBar';
+
+  import { MaterialIcons } from '@expo/vector-icons';
   
   
   //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
@@ -181,7 +183,7 @@ import React, {
           <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Dips</Text>
               <Text style={styles.tableCell}>Traction</Text>
-              <Text style={styles.tableCell}>Muscleup</Text>
+              <Text style={styles.tableCell3}>Muscleup</Text>
               <Text style={styles.tableCell}>Total</Text>
               <Text style={styles.tableCell}>Date</Text>
               <Text style={styles.tableCell2}>                   </Text>
@@ -199,7 +201,7 @@ import React, {
               <Text style={styles.tableCell1}>{item.total} kg</Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                <Text style={styles.buttonDelete}>Delete</Text>
+                <MaterialIcons name="delete" size={24} color="red" />
               </TouchableOpacity>
             </View>
           )}
@@ -238,8 +240,8 @@ import React, {
           yAxisLabel={'kg '}
           chartConfig={{
             backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#2e2e2e",
-            backgroundGradientTo: "#606061",
+            backgroundGradientFrom: "#97A4B3",
+            backgroundGradientTo: "#bec6cf",
             decimalPlaces: 0,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -288,14 +290,21 @@ import React, {
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      
+      marginTop: 15,
     },
     square: {
+      shadowColor: 'black',
+      shadowOffset: { 
+        width: 0, 
+        height: 11 },
+      shadowOpacity: 0.16,
+     shadowRadius: 16,
+      elevation: 4,
       width: '30%',
       aspectRatio: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'darkgray',
+      backgroundColor: 'white',
       margin: 5,
       borderRadius: 5,
     },
@@ -329,8 +338,9 @@ import React, {
       textAlign: 'center',
     },
     totalValue: {
-      margin: 10,
-      fontSize: 16,
+      marginRight: 10,
+      marginLeft: 10,
+      fontSize: 25,
       textAlign: 'center',
     },
     totalButton: {
@@ -361,16 +371,26 @@ import React, {
       
     },
     tableCell:{
-      padding: 5,
+      marginLeft: -4,
       fontSize: 16,
+      width: '19%',
+      textAlign: 'center'
     },
     tableCell1: {
       textAlign: 'center',
       fontSize: 20,
+      
+      width: '20%'
     },
     tableCell2: {
       textAlign: 'center',
       fontSize: 16,
+    },
+    
+    tableCell3:{
+      padding: 5,
+      fontSize: 16,
+      textAlign: 'center'
     },
     flatlist: {
       width: '100%',
