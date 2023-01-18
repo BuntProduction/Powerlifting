@@ -11,6 +11,8 @@ import React, {
   
   import { LineChart } from 'react-native-chart-kit';
 
+  import { MaterialIcons } from '@expo/vector-icons';
+
   import StatusBar from './MyStatusBar';
   
   
@@ -18,7 +20,7 @@ import React, {
   
   const SBD = () => {
   
-  
+    const [maxValues, setMaxValues] = useState({});
     const [data, setData] = useState([]);
     const reversedData = data.slice().reverse();
     const [showLineChart, setShowLineChart] = useState(false);
@@ -28,7 +30,9 @@ import React, {
       AsyncStorage.getItem('data').then(data => {
           if(data){
             setData(JSON.parse(data));
+            //setMaxValues(extractMaxValues(data));
             setShowLineChart(true);
+            
           }else{
             setData([]);
           }
@@ -122,6 +126,35 @@ import React, {
     const handleDeadliftPress = () => {
       deadliftInputRef.current.focus();
     };
+
+
+    /*part for the max Value
+    const extractMaxValues = (data) => {
+      let maxValues = {
+        squat: 0,
+        bench: 0,
+        deadlift: 0,
+        total: 0
+      };
+    
+      data.forEach((item) => {
+        if (item.squat > maxValues.squat) {
+          maxValues.squat = item.squat;
+        }
+        if (item.bench > maxValues.bench) {
+          maxValues.bench = item.bench;
+        }
+        if (item.deadlift > maxValues.deadlift) {
+          maxValues.deadlift = item.deadlift;
+        }
+        if (item.total > maxValues.total) {
+          maxValues.total = item.total;
+        }
+      });
+    
+      return maxValues;
+    }
+  //end of the max part   */ 
     
   
     
@@ -200,7 +233,7 @@ import React, {
               <Text style={styles.tableCell1}>{item.total} kg</Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                <Text style={styles.buttonDelete}>Delete</Text>
+              <MaterialIcons name="delete" size={24} color="red" />
               </TouchableOpacity>
             </View>
           )}
@@ -240,7 +273,7 @@ import React, {
           chartConfig={{
             backgroundColor: "#e26a00",
             backgroundGradientFrom: "#97A4B3",
-            backgroundGradientTo: "#97A4B3",
+            backgroundGradientTo: "#bec6cf",
             decimalPlaces: 0,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -289,14 +322,22 @@ import React, {
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: 15
       
     },
     square: {
+      shadowColor: 'black',
+      shadowOffset: { 
+        width: 0, 
+        height: 11 },
+      shadowOpacity: 0.16,
+     shadowRadius: 16,
+      elevation: 4,
       width: '30%',
       aspectRatio: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'darkgray',
+      backgroundColor: 'white',
       margin: 5,
       borderRadius: 5,
     },
@@ -330,8 +371,9 @@ import React, {
       textAlign: 'center',
     },
     totalValue: {
-      margin: 10,
-      fontSize: 16,
+      marginRight: 10,
+      marginLeft: 10,
+      fontSize: 25,
       textAlign: 'center',
     },
     totalButton: {
@@ -345,7 +387,6 @@ import React, {
       textAlign: 'center',
     },
     deleteButton: {
-  
     },
     buttonDelete: {
       color: 'red',
@@ -364,10 +405,13 @@ import React, {
     tableCell:{
       padding: 5,
       fontSize: 16,
+      width: '18%',
+      textAlign: 'center'
     },
     tableCell1: {
       textAlign: 'center',
       fontSize: 20,
+      width: '20%'
     },
     tableCell2: {
       textAlign: 'center',
