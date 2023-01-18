@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Entypo } from '@expo/vector-icons';
 
+
 const HomeScreen = () => {
   const [squat, setSquat] = useState('');
   const [bench, setBench] = useState('');
@@ -107,7 +108,7 @@ const HomeScreen = () => {
       </View>
       <View style={styles.square}>
         <Text style={styles.text}>Total</Text>
-        <Text style={styles.value}>{total}</Text>
+        <Text style={styles.value}>{total ? total : '0 kg'}</Text>
       </View>
       </View>
       <View style={styles.timerContainerContainer}>
@@ -122,7 +123,7 @@ const HomeScreen = () => {
       <TouchableOpacity onPress={handleStopPress} disabled={!isRunning} style={styles.timerLogos}>
         <Entypo name="controller-stop" size={50} color="black" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleResetPress} disabled={isRunning} style={styles.timerLogos}>
+      <TouchableOpacity onPress={handleResetPress} style={styles.timerLogos}>
         <Entypo name="ccw" size={50} color="black" />
       </TouchableOpacity>
       </View>
