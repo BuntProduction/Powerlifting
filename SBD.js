@@ -20,17 +20,15 @@ import React, {
   
   const SBD = () => {
   
-    const [maxValues, setMaxValues] = useState({});
     const [data, setData] = useState([]);
     const reversedData = data.slice().reverse();
     const [showLineChart, setShowLineChart] = useState(false);
-  
+
   
     useEffect(() => {
       AsyncStorage.getItem('data').then(data => {
           if(data){
             setData(JSON.parse(data));
-            //setMaxValues(extractMaxValues(data));
             setShowLineChart(true);
             
           }else{
@@ -128,34 +126,21 @@ import React, {
     };
 
 
-    /*part for the max Value
-    const extractMaxValues = (data) => {
-      let maxValues = {
-        squat: 0,
-        bench: 0,
-        deadlift: 0,
-        total: 0
-      };
-    
-      data.forEach((item) => {
-        if (item.squat > maxValues.squat) {
-          maxValues.squat = item.squat;
-        }
-        if (item.bench > maxValues.bench) {
-          maxValues.bench = item.bench;
-        }
-        if (item.deadlift > maxValues.deadlift) {
-          maxValues.deadlift = item.deadlift;
-        }
-        if (item.total > maxValues.total) {
-          maxValues.total = item.total;
-        }
+    const extractMaxValues = () => {
+      let maxValues = {};
+      data.forEach(item => {
+          if(!maxValues.squat || item.squat > maxValues.squat) {
+              maxValues.squat = item.squat;
+          }
+          if(!maxValues.bench || item.bench > maxValues.bench) {
+              maxValues.bench = item.bench;
+          }
+          if(!maxValues.deadlift || item.deadlift > maxValues.deadlift) {
+              maxValues.deadlift = item.deadlift;
+          }
       });
-    
       return maxValues;
-    }
-  //end of the max part   */ 
-    
+  }
   
     
     return (
@@ -169,7 +154,11 @@ import React, {
                     height: 90,
                     resizeMode: 'contain',
                 }}/>
-        
+        <View>
+            <Text>Maximum squat: {extractMaxValues().squat}</Text>
+            <Text>Maximum bench: {extractMaxValues().bench}</Text>
+            <Text>Maximum deadlift: {extractMaxValues().deadlift}</Text>
+        </View>
         <View style={styles.squaresContainer}>
           <TouchableOpacity style={styles.square} onPress={handleSquatPress}>
             <TextInput

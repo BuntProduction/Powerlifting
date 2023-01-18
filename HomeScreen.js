@@ -81,7 +81,6 @@ const HomeScreen = () => {
     
     <View style={styles.container}>
       <StatusBar />
-      
       <Image source={
           require('./img/LogoNoirNoBG.png')} 
           style={{  width: 90,
