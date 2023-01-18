@@ -172,7 +172,7 @@ import React, {
         <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total:</Text>
             <Text style={styles.totalValue}>{total} kg</Text>
-            <TouchableOpacity style={styles.totalButton} onPress={handleTotal}>
+            <TouchableOpacity style={styles.totalButton} onPress={() => {handleTotal(); setShowLineChart(true);}}>
               <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
           </View>
