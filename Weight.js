@@ -141,7 +141,7 @@ const Weight = () => {
               },
             ],
           }}
-          width={Dimensions.get("window").width}
+          width={Dimensions.get("window").width - 12}
           height={220}
           yAxisLabel={'kg '}
           chartConfig={{

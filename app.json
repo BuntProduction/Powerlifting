@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Powerlifting v0.3",
+    "name": "SBD Perf v0.3.3",
     "slug": "Powerlifting",
-    "version": "0.3",
+    "version": "0.3.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./img/LogoNoirNoBG.png",
+      "image": "./img/SplashLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./img/LogoNoirNoBG.png",
+        "foregroundImage": "./img/MiniLogo.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.bunt.Powerlifting"

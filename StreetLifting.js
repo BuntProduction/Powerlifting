@@ -13,7 +13,7 @@ import React, {
 
   import StatusBar from './MyStatusBar';
 
-  import { MaterialIcons } from '@expo/vector-icons';
+  import { MaterialIcons, Entypo } from '@expo/vector-icons';
   
   
   //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
@@ -178,7 +178,7 @@ import React, {
             <Text style={styles.totalText}>Total:</Text>
             <Text style={styles.totalValue}>{total} kg</Text>
             <TouchableOpacity style={styles.totalButton} onPress={handleTotal}>
-              <Text style={styles.buttonText}>Save</Text>
+              <Entypo name="save" size={30} color="#97A4B3"/>
             </TouchableOpacity>
           </View>
           <View style={styles.tableRow}>
@@ -236,7 +236,7 @@ import React, {
               },
             ],
           }}
-          width={Dimensions.get("window").width}
+          width={Dimensions.get("window").width - 12}
           height={220}
           yAxisLabel={'kg '}
           chartConfig={{
@@ -343,11 +343,10 @@ import React, {
       marginLeft: 10,
       fontSize: 25,
       textAlign: 'center',
+      fontWeight: 'bold',
     },
     totalButton: {
-      backgroundColor: '#e26a00',
-      padding: 10,
-      borderRadius: 5,
+      marginTop: 5,
     },
     buttonText: {
       color: '#fff',
@@ -364,34 +363,45 @@ import React, {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderBottomWidth: 1,
-      borderBottomColor: '#ccc',
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 10,
       padding: 10,
       marginTop: 10,
       width: '100%',
+      elevation: 4,
+      shadowColor: 'rgba(0, 0, 0, 0.7)',
+      shadowOffset: { width: 0, height: 11 },
+      shadowOpacity: 1,
+      shadowRadius: 16,
+      backgroundColor: 'white'
       
     },
     tableCell:{
       marginLeft: -4,
+      padding: 1,
       fontSize: 16,
-      width: '19%',
-      textAlign: 'center'
+      width: '18%',
+      textAlign: 'center',
+      fontWeight: 'bold',
     },
     tableCell1: {
       textAlign: 'center',
       fontSize: 20,
-      
-      width: '20%'
+      width: '20%',
+      fontWeight: 'bold',
     },
     tableCell2: {
       textAlign: 'center',
-      fontSize: 16,
+      fontSize: 16
     },
     
     tableCell3:{
       padding: 5,
       fontSize: 16,
-      textAlign: 'center'
+      textAlign: 'center',
+      
+      fontWeight: 'bold',
     },
     flatlist: {
       width: '100%',

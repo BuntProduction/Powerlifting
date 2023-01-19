@@ -267,21 +267,35 @@ const styles = StyleSheet.create({
   alignItems: 'center',
   justifyContent: 'center',
   marginTop: 20,
+  
   },
   timerContainerContainer: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
     },
   timerText: {
-  fontSize: 30,
-  fontWeight: 'bold',
+    fontSize: 40,
+    textAlign: 'center',
+    color: 'black',
   },
   timerNumber: {
     fontSize: 50
   },
   timerLogoContainer: {
-    flexDirection: 'row',
+        flexDirection: 'row',
     justifyContent: 'space-between',
+    shadowColor: 'black',
+  shadowOffset: { 
+    width: 0, 
+    height: 11 },
+  shadowOpacity: 0.16,
+  shadowRadius: 16,
+  elevation: 4,
+  backgroundColor: 'white',
+  alignItems: 'center',
+  justifyContent: 'center',
+  margin: 10,
+  borderRadius: 46,
   },
   timerLogos: {
     margin: 10
