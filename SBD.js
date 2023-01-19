@@ -30,7 +30,7 @@ import React, {
       AsyncStorage.getItem('data').then(data => {
           if(data){
             setData(JSON.parse(data));
-            setShowLineChart(true);
+            setShowLineChart(false);
             
           }else{
             setData([]);
@@ -150,10 +150,11 @@ import React, {
       <View style={styles.container}>
         
         <Image source={
-          require('./img/LogoNoirNoBG.png')} 
-          style={{  width: 90,
-                    height: 90,
-                    resizeMode: 'contain',
+          require('./img/SBDPerf4.png')} 
+          style={{  width: 140,
+            height: 140,
+            resizeMode: 'contain',
+            marginTop: -30
                 }}/>
         <View style={styles.squaresContainer}>
           <TouchableOpacity style={styles.square} onPress={handleSquatPress}>

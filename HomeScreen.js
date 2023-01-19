@@ -116,10 +116,11 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <StatusBar />
       <Image source={
-          require('./img/LogoNoirNoBG.png')} 
-          style={{  width: 90,
-                    height: 90,
+          require('./img/SBDPerf4.png')} 
+          style={{  width: 140,
+                    height: 140,
                     resizeMode: 'contain',
+                    marginTop: -30
                 }}/>
       <View style={styles.inputView}>
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleSquatPress}>
@@ -129,6 +130,7 @@ const HomeScreen = () => {
                     height: 120,
                     resizeMode: 'contain',
                 }}/>
+        <View style={styles.inputTextContainer}>
         <TextInput
           ref={squatInputRef}
           style={styles.input}
@@ -136,6 +138,8 @@ const HomeScreen = () => {
           onChangeText={handleSquatChange}
           keyboardType='numeric'
         />
+        <Text style={styles.weightStyle}>kg</Text>
+        </View>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleBenchPress}>
@@ -145,13 +149,16 @@ const HomeScreen = () => {
                     height: 120,
                     resizeMode: 'contain',
                 }}/>
-        <TextInput
-          ref={benchInputRef}
-          style={styles.input}
-          value={ bench }
-          onChangeText={handleBenchChange}
-          keyboardType='numeric'
-        />
+        <View style={styles.inputTextContainer}>
+          <TextInput
+            ref={benchInputRef}
+            style={styles.input}
+            value={ bench }
+            onChangeText={handleBenchChange}
+            keyboardType='numeric'
+          />
+        <Text style={styles.weightStyle}>kg</Text>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleDeadliftPress}>
       <Image source={
@@ -160,13 +167,16 @@ const HomeScreen = () => {
                     height: 120,
                     resizeMode: 'contain',
                 }}/>
-        <TextInput
-          ref={deadliftInputRef}
-          style={styles.input}
-          value={ deadlift }
-          onChangeText={handleDeadliftChange}
-          keyboardType='numeric'
-        />
+        <View style={styles.inputTextContainer}>
+          <TextInput
+            ref={deadliftInputRef}
+            style={styles.input}
+            value={ deadlift }
+            onChangeText={handleDeadliftChange}
+            keyboardType='numeric'
+          />
+        <Text style={styles.weightStyle}>kg</Text>
+        </View>
       </TouchableOpacity>
 
       <View style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]}>
@@ -212,7 +222,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     alignContent: 'center',
-    marginTop: 10
+  },
+  inputTextContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   square: {
   shadowColor: 'black',
@@ -230,12 +244,16 @@ const styles = StyleSheet.create({
   
   },
   input: {
-  width: '80%',
+  width: '50%',
   height: 40,
   marginBottom: 10,
   fontSize: 36,
   textAlign: 'center',
   fontWeight: 'bold',
+  },
+  weightStyle:{
+    fontSize: 25,
+    textAlign: 'center',
   },
   text: {
   fontSize: 20,
