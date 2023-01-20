@@ -212,7 +212,7 @@ import React, {
           data={reversedData}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <View style={styles.tableRow}>
+            <View style={styles.tableRow2}>
               <Text style={styles.tableCell}>{item.squat} kg </Text>
               <Text style={styles.tableCell}>{item.bench} kg </Text>
               <Text style={styles.tableCell}>{item.deadlift} kg </Text>
@@ -265,6 +265,7 @@ import React, {
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
               borderRadius: 16,
+              
             },
             propsForDots: {
               r: "5",
@@ -381,7 +382,6 @@ import React, {
     tableRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
       borderWidth: 1,
       borderColor: 'white',
       borderRadius: 10,
@@ -395,6 +395,23 @@ import React, {
       shadowRadius: 16,
       backgroundColor: 'white'
       
+    },
+    tableRow2:{
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 10,
+      padding: 10,
+      marginTop: 10,
+      width: '95%',
+      elevation: 4,
+      shadowColor: 'rgba(0, 0, 0, 0.7)',
+      shadowOffset: { width: 0, height: 11 },
+      shadowOpacity: 1,
+      shadowRadius: 16,
+      backgroundColor: 'white',
+      marginRight: 10
     },
     tableCell:{
       padding: 1,
@@ -415,7 +432,7 @@ import React, {
     },
     flatlist: {
       width: '100%',
-      marginTop: -3,
+      marginTop: 5, 
 
     },
   });

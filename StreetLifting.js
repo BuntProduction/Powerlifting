@@ -195,7 +195,7 @@ import React, {
           data={reversedData2}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <View style={styles.tableRow}>
+            <View style={styles.tableRow2}>
               <Text style={styles.tableCell}>{item.dips} kg </Text>
               <Text style={styles.tableCell}>{item.traction} kg </Text>
               <Text style={styles.tableCell}>{item.muscleup} kg </Text>
@@ -377,6 +377,23 @@ import React, {
       backgroundColor: 'white'
       
     },
+    tableRow2: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 10,
+      padding: 10,
+      marginTop: 10,
+      width: '95%',
+      elevation: 4,
+      shadowColor: 'rgba(0, 0, 0, 0.7)',
+      shadowOffset: { width: 0, height: 11 },
+      shadowOpacity: 1,
+      shadowRadius: 16,
+      backgroundColor: 'white',
+      marginRight: 10
+    },
     tableCell:{
       marginLeft: -4,
       padding: 1,
@@ -405,7 +422,7 @@ import React, {
     },
     flatlist: {
       width: '100%',
-      marginTop: -3,
+      marginTop: 5, 
     },
   });
   
