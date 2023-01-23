@@ -83,6 +83,8 @@ import React, {
       await AsyncStorage.setItem('deadlift', text);
     }
     //end of the part of the save oif the inputfield
+
+    const [isSaved, setIsSaved] = useState(false);
   
     const handleTotal = async () => {
   
@@ -99,6 +101,11 @@ import React, {
   
       let newData = [...data, { squat: squatValue, bench: benchValue, deadlift: deadliftValue, total: newTotal, date, id: uuidv4() }];
       setData(newData);
+
+      setIsSaved(true);
+      setTimeout(() => {
+      setIsSaved(false);
+       }, 2000);
   
   
       await AsyncStorage.setItem('data', JSON.stringify(newData));
@@ -142,6 +149,12 @@ import React, {
       });
       return maxValues;
   }
+
+  useEffect(() => {
+    const newTotal = parseInt(squat) + parseInt(bench) + parseInt(deadlift);
+    setTotal(newTotal);
+  }, [squat, bench, deadlift]); // to addition the data before the save button
+  
   
     
     return (
@@ -166,7 +179,6 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Squat</Text>
-            <Text style={styles.value}>Max: {extractMaxValues().squat}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleBenchPress}>
             <TextInput
@@ -177,7 +189,6 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Bench</Text>
-            <Text style={styles.value}>Max: {extractMaxValues().bench}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleDeadliftPress}>
             <TextInput
@@ -188,15 +199,20 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Deadlift</Text>
-            <Text style={styles.value}>Max: {extractMaxValues().deadlift}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total:</Text>
-            <Text style={styles.totalValue}>{total} kg</Text>
+            <Text style={styles.totalValue}>{total ? total : '0'} kg</Text>
+            
             <TouchableOpacity style={styles.totalButton} onPress={() => {handleTotal(); setShowLineChart(true);}}>
               <Entypo name="save" size={30} color="#97A4B3"/>
             </TouchableOpacity>
+            {isSaved && (
+              <View style={styles.savedContainer}>
+                <Text style={styles.savedText}>Saved</Text>
+              </View>
+            )}
           </View>
           <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Squat</Text>
@@ -219,7 +235,7 @@ import React, {
               <Text style={styles.tableCell1}>{item.total} kg</Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                <MaterialIcons name="delete" size={24} color="red" />
+                <MaterialIcons name="delete" size={24} color="#97A4B3" />
               </TouchableOpacity>
             </View>
           )}
@@ -346,6 +362,7 @@ import React, {
     value: {
       fontSize: 16,
       textAlign: 'center',
+      color: '#fca11c'
     },
     totalContainer: {
       flexDirection: 'row',
@@ -364,6 +381,7 @@ import React, {
       marginLeft: 10,
       fontSize: 25,
       textAlign: 'center',
+      color: '#fca11c'
 
     },
     totalButton: {
@@ -374,10 +392,18 @@ import React, {
       fontWeight: 'bold',
       textAlign: 'center',
     },
-    deleteButton: {
+    savedContainer:{
+      marginLeft: 10,
+
     },
+
+    savedText: {
+      fontStyle:'italic',
+      fontSize: 15,
+    },
+
     buttonDelete: {
-      color: 'red',
+      color: 'black',
     },
     tableRow: {
       flexDirection: 'row',

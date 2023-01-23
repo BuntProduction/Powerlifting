@@ -124,6 +124,11 @@ import React, {
     const handleMuscleupPress = () => {
       muscleupInputRef.current.focus();
     };
+
+    useEffect(() => {
+      const newTotal = parseInt(dips) + parseInt(traction) + parseInt(muscleup);
+      setTotal(newTotal);
+    }, [dips, traction, muscleup]);
   
     
     return (
@@ -149,7 +154,6 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Dips</Text>
-            <Text style={styles.value}>{dips}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleTractionPress}>
             <TextInput
@@ -160,7 +164,6 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Traction</Text>
-            <Text style={styles.value}>{traction}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleMuscleupPress}>
             <TextInput
@@ -171,12 +174,11 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Muscleup</Text>
-            <Text style={styles.value}>{muscleup}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.totalContainer}>
             <Text style={styles.totalText}>Total:</Text>
-            <Text style={styles.totalValue}>{total} kg</Text>
+            <Text style={styles.totalValue}>{total ? total : '0'} kg</Text>
             <TouchableOpacity style={styles.totalButton} onPress={handleTotal}>
               <Entypo name="save" size={30} color="#97A4B3"/>
             </TouchableOpacity>
@@ -202,7 +204,7 @@ import React, {
               <Text style={styles.tableCell1}>{item.total} kg</Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                <MaterialIcons name="delete" size={24} color="red" />
+                <MaterialIcons name="delete" size={24} color="#97A4B3" />
               </TouchableOpacity>
             </View>
           )}
@@ -326,6 +328,7 @@ import React, {
     value: {
       fontSize: 16,
       textAlign: 'center',
+      color: '#fca11c'
     },
     totalContainer: {
       flexDirection: 'row',
@@ -344,6 +347,7 @@ import React, {
       fontSize: 25,
       textAlign: 'center',
       fontWeight: 'bold',
+      color: '#fca11c'
     },
     totalButton: {
       marginTop: 5,
@@ -374,7 +378,7 @@ import React, {
       shadowOffset: { width: 0, height: 11 },
       shadowOpacity: 1,
       shadowRadius: 16,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
       
     },
     tableRow2: {
@@ -385,14 +389,14 @@ import React, {
       borderRadius: 10,
       padding: 10,
       marginTop: 10,
-      width: '95%',
+      width: '100%',
       elevation: 4,
       shadowColor: 'rgba(0, 0, 0, 0.7)',
       shadowOffset: { width: 0, height: 11 },
       shadowOpacity: 1,
       shadowRadius: 16,
       backgroundColor: 'white',
-      marginRight: 10
+      marginRight: '2%'
     },
     tableCell:{
       marginLeft: -4,

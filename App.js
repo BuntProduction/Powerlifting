@@ -15,7 +15,7 @@ const App = () => {
   const Tab = createBottomTabNavigator();
 
   const colorIcon = '#97A4B3';
-  const colorIconFocused = '#03C2DB';
+  const colorIconFocused = '#fca11c';
   
   return (
 

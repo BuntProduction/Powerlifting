@@ -10,7 +10,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, FlatList, D
   import { v4 as uuidv4 } from 'uuid';
   import { LineChart } from 'react-native-chart-kit';
   
-  import { MaterialIcons } from '@expo/vector-icons';
+  import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
   import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -111,9 +111,13 @@ const Weight = () => {
             <Text style={styles.text}>Weight</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.totalButton} onPress={() => {handleTotal(); setShowLineChart3(true);}}>
-              <Text style={styles.buttonText}>Save</Text>
+          <Entypo name="save" size={30} color="#97A4B3"/>
             </TouchableOpacity>
           </View>
+          <View style={styles.tableRow1}>
+              <Text style={styles.tableCell}>Weight</Text>
+              <Text style={styles.tableCell3}>Date</Text>
+            </View>
           <FlatList
           contentContainerStyle={{ alignItems: 'flex-end',}}
           style={styles.flatlist}
@@ -124,7 +128,7 @@ const Weight = () => {
               <Text style={styles.tableCell}>{item.weight} kg </Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-                <MaterialIcons name="delete" size={24} color="red" />
+                <MaterialIcons name="delete" size={24} color="#97A4B3" />
               </TouchableOpacity>
             </View>
           )}
@@ -182,7 +186,7 @@ const styles = StyleSheet.create({
   },
   
   squaresContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -246,9 +250,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   totalButton: {
-    backgroundColor: '#e26a00',
-    padding: 10,
-    borderRadius: 5,
+    marginTop: 5,
+    right: '25%',
+    position: 'absolute'
   },
   buttonText: {
     color: '#fff',
@@ -261,21 +265,48 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   tableRow: {
+      justifyContent: 'center',
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 10,
+      padding: 10,
+      marginTop: 10,
+      width: '80%',
+      elevation: 4,
+      shadowColor: 'rgba(0, 0, 0, 0.7)',
+      shadowOffset: { width: 0, height: 11 },
+      shadowOpacity: 1,
+      shadowRadius: 16,
+      backgroundColor: 'white',
+      marginRight: '10%',
+    
+  },
+  tableRow1: {
+    justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 10,
     padding: 10,
     marginTop: 10,
-    width: '100%',
-    
+    width: '80%',
+    elevation: 4,
+    shadowColor: 'rgba(0, 0, 0, 0.7)',
+    shadowOffset: { width: 0, height: 11 },
+    shadowOpacity: 1,
+    shadowRadius: 16,
+    backgroundColor: 'white',
+    marginBottom: 5
   },
   tableCell:{
     padding: 5,
     fontSize: 16,
     width: '50%',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   tableCell1: {
     textAlign: 'center',
@@ -285,10 +316,21 @@ const styles = StyleSheet.create({
   tableCell2: {
     textAlign: 'center',
     fontSize: 16,
+    width: '40%',
+    marginRight: 10
+  },
+  tableCell3:{
+    padding: 5,
+    fontSize: 16,
+    width: '40%',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginRight: '15%'
+
   },
   flatlist: {
     height: '20%',
-    width: '80%',
+    width: '100%',
     marginTop: -3,
   },
 });
