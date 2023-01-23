@@ -104,7 +104,7 @@ import React, {
 
       setIsSaved(true);
       setTimeout(() => {
-      setIsSaved(false);
+        setIsSaved(false);
        }, 2000);
   
   
@@ -155,7 +155,10 @@ import React, {
     setTotal(newTotal);
   }, [squat, bench, deadlift]); // to addition the data before the save button
   
-  
+  let filteredData = data;
+
+
+filteredData = filteredData.slice(0,10); // limit to 10 values
     
     return (
   
@@ -245,25 +248,25 @@ import React, {
           {showLineChart && 
         <LineChart
           data={{
-            labels: data.map(item => item.date),
+            labels: filteredData.map(item => item.date),
             datasets: [
               {
-                data: data.map(item => item.squat),
+                data: filteredData.map(item => item.squat),
                 strokeWidth: 2,
                 label: 'Squat'
               },
               {
-                data: data.map(item => item.bench),
+                data: filteredData.map(item => item.bench),
                 strokeWidth: 2,
                 label: 'Bench'
               },
               {
-                data: data.map(item => item.deadlift),
+                data: filteredData.map(item => item.deadlift),
                 strokeWidth: 2,
                 label: 'Deadlift'
               },
               {
-                data: data.map(item => item.total),
+                data: filteredData.map(item => item.total),
                 strokeWidth: 2,
                 label: 'Total'
               },

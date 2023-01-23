@@ -82,6 +82,8 @@ import React, {
       await AsyncStorage.setItem('muscle', text);
     }
     //end of the part of the save oif the inputfield
+
+    const [isSaved, setIsSaved] = useState(false);
   
     const handleTotal = async () => {
   
@@ -99,6 +101,10 @@ import React, {
       let newData2 = [...data2, { dips: dipsValue, traction: tractionValue, muscleup: muscleupValue, total: newTotal, date, id: uuidv4() }];
       setData2(newData2);
   
+      setIsSaved(true);
+      setTimeout(() => {
+        setIsSaved(false);
+       }, 2000);
   
       await AsyncStorage.setItem('data2', JSON.stringify(newData2));
     }
@@ -182,6 +188,11 @@ import React, {
             <TouchableOpacity style={styles.totalButton} onPress={handleTotal}>
               <Entypo name="save" size={30} color="#97A4B3"/>
             </TouchableOpacity>
+            {isSaved && (
+              <View style={styles.savedContainer}>
+                <Text style={styles.savedText}>Saved</Text>
+              </View>
+            )}
           </View>
           <View style={styles.tableRow}>
               <Text style={styles.tableCell}>Dips</Text>
@@ -357,8 +368,15 @@ import React, {
       fontWeight: 'bold',
       textAlign: 'center',
     },
-    deleteButton: {
-  
+    
+    savedContainer:{
+      marginLeft: 10,
+
+    },
+
+    savedText: {
+      fontStyle:'italic',
+      fontSize: 15,
     },
     buttonDelete: {
       color: 'red',
