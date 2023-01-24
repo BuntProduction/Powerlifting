@@ -86,7 +86,7 @@ const App = () => {
       component={SettingsScreen} 
       options={{ 
         tabBarIcon: ({ focused, color, size }) => {
-          return <Ionicons name='md-settings' size={size} color={focused ? colorIconFocused : colorIcon} />;
+          return <FontAwesome5 name='trophy' size={size} color={focused ? colorIconFocused : colorIcon} />;
         },
         headerShown: false }}/>
     </Tab.Navigator>

@@ -87,6 +87,9 @@ const Weight = () => {
       await AsyncStorage.setItem('data3', JSON.stringify(newData3));
     }
 
+    let filteredData3 = data3;
+    filteredData3 = filteredData3.slice(data3.length-10); // limit to 10 values
+
   return (
     <View style={styles.container}>
 
@@ -125,7 +128,7 @@ const Weight = () => {
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <View style={styles.tableRow}>
-              <Text style={styles.tableCell}>{item.weight} kg </Text>
+              <Text style={styles.tableCell4}>{item.weight} kg </Text>
               <Text style={styles.tableCell2}>{item.date}</Text>
               <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
                 <MaterialIcons name="delete" size={24} color="#97A4B3" />
@@ -136,10 +139,10 @@ const Weight = () => {
           {showLineChart3 && 
         <LineChart
           data={{
-            labels: data3.map(item => item.date),
+            labels: filteredData3.map(item => item.date),
             datasets: [
               {
-                data: data3.map(item => item.weight),
+                data: filteredData3.map(item => item.weight),
                 strokeWidth: 2,
                 label: 'Weight'
               },
@@ -289,10 +292,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'white',
-    borderRadius: 10,
     padding: 10,
     marginTop: 10,
-    width: '80%',
+    width: '100%',
     elevation: 4,
     shadowColor: 'rgba(0, 0, 0, 0.7)',
     shadowOffset: { width: 0, height: 11 },
@@ -325,8 +327,15 @@ const styles = StyleSheet.create({
     width: '40%',
     textAlign: 'center',
     fontWeight: 'bold',
-    marginRight: '15%'
+    paddingRight: '22%'
 
+  },
+  tableCell4:{
+    padding: 5,
+    fontSize: 16,
+    width: '50%',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   flatlist: {
     height: '20%',

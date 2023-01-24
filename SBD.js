@@ -156,9 +156,7 @@ import React, {
   }, [squat, bench, deadlift]); // to addition the data before the save button
   
   let filteredData = data;
-
-
-filteredData = filteredData.slice(0,10); // limit to 10 values
+  filteredData = filteredData.slice(data.length-10); // limit to 10 values
     
     return (
   
@@ -413,7 +411,6 @@ filteredData = filteredData.slice(0,10); // limit to 10 values
       alignItems: 'center',
       borderWidth: 1,
       borderColor: 'white',
-      borderRadius: 10,
       padding: 10,
       marginTop: 10,
       width: '100%',

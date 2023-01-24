@@ -135,6 +135,9 @@ import React, {
       const newTotal = parseInt(dips) + parseInt(traction) + parseInt(muscleup);
       setTotal(newTotal);
     }, [dips, traction, muscleup]);
+
+    let filteredData2 = data2;
+    filteredData2 = filteredData2.slice(data2.length-10); // limit to 10 values
   
     
     return (
@@ -225,25 +228,25 @@ import React, {
           {showLineChart2 && 
         <LineChart
           data={{
-            labels: data2.map(item => item.date),
+            labels: filteredData2.map(item => item.date),
             datasets: [
               {
-                data: data2.map(item => item.dips),
+                data: filteredData2.map(item => item.dips),
                 strokeWidth: 2,
                 label: 'Dips'
               },
               {
-                data: data2.map(item => item.traction),
+                data: filteredData2.map(item => item.traction),
                 strokeWidth: 2,
                 label: 'Traction'
               },
               {
-                data: data2.map(item => item.muscleup),
+                data: filteredData2.map(item => item.muscleup),
                 strokeWidth: 2,
                 label: 'Muscleup'
               },
               {
-                data: data2.map(item => item.total),
+                data: filteredData2.map(item => item.total),
                 strokeWidth: 2,
                 label: 'Total'
               },
@@ -387,7 +390,6 @@ import React, {
       justifyContent: 'space-between',
       borderWidth: 1,
       borderColor: 'white',
-      borderRadius: 10,
       padding: 10,
       marginTop: 10,
       width: '100%',
