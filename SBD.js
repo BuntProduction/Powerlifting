@@ -3,7 +3,7 @@ import React, {
     useEffect
   } from 'react';
   import { 
-    View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions, Image, Pressable
+    View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions, Image, Pressable, Modal
   } from 'react-native';
   import AsyncStorage from '@react-native-async-storage/async-storage';
   import 'react-native-get-random-values';
@@ -11,7 +11,7 @@ import React, {
   
   import { LineChart } from 'react-native-chart-kit';
 
-  import { MaterialIcons, Entypo } from '@expo/vector-icons';
+  import { MaterialIcons, Entypo, FontAwesome5, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
   import StatusBar from './MyStatusBar';
   
@@ -24,6 +24,8 @@ import React, {
     const [data, setData] = useState([]);
     const reversedData = data.slice().reverse();
     const [showLineChart, setShowLineChart] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
   
     useEffect(() => {
@@ -150,6 +152,9 @@ import React, {
       return maxValues;
   }
 
+  const maxValues = extractMaxValues(data);
+
+
   useEffect(() => {
     const newTotal = parseInt(squat) + parseInt(bench) + parseInt(deadlift);
     setTotal(newTotal);
@@ -157,6 +162,8 @@ import React, {
   
   let filteredData = data;
   filteredData = filteredData.slice(data.length-10); // limit to 10 values
+
+  
     
     return (
   
@@ -170,6 +177,108 @@ import React, {
             resizeMode: 'contain',
             marginTop: -30
                 }}/>
+        <TouchableOpacity style={styles.trophyButton} onPress={() => setModalVisible(true)}>
+        <FontAwesome5 name='trophy' size={24} color={'#97A4B3'} />
+        </TouchableOpacity>
+
+          <Modal visible={modalVisible}>
+              <View style={styles.modalOverlay}>
+                  <TouchableOpacity onPress={() => setModalVisible(false)}>
+                  <AntDesign name="back" size={32} color="#97A4B3" />
+                  </TouchableOpacity>
+                  <Text>Goals</Text>
+                  <Text>Max Squat : {maxValues.squat}</Text>
+                  <Text>Max Bench : {maxValues.bench}</Text>
+                  <Text>Max Deadlift : {maxValues.deadlift}</Text>
+
+                  <Text>Achievements</Text>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
+                      <Text>Squat 50kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
+                      <Text>Squat 100kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
+                      <Text>Squat 150kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
+                      <Text>Squat 200kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
+                      <Text>Squat 225kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
+                      <Text>Squat 250kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
+                      <Text>Bench 50kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
+                      <Text>Bench 80kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
+                      <Text>Bench 100kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
+                      <Text>Bench 130kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
+                      <Text>Bench 150kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
+                      <Text>Bench 180kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
+                      <Text>Deadlift 50kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
+                      <Text>Deadlift 100kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
+                      <Text>Deadlift 150kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
+                      <Text>Deadlift 200kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
+                      <Text>Deadlift 250kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
+                      <Text>Deadlift 300kg</Text>
+                    </View>
+                  </View>
+              </View>
+          </Modal>
+
         <View style={styles.squaresContainer}>
           <TouchableOpacity style={styles.square} onPress={handleSquatPress}>
             <TextInput
@@ -190,6 +299,7 @@ import React, {
               keyboardType='numeric'
             />
             <Text style={styles.text}>Bench</Text>
+            
           </TouchableOpacity>
           <TouchableOpacity style={styles.square} onPress={handleDeadliftPress}>
             <TextInput
@@ -321,6 +431,32 @@ import React, {
       justifyContent: 'center',
       backgroundColor: 'white'
     },
+    trophyButton:{
+      position: 'absolute',
+      top: '11%',
+      right: '5%',
+    },
+    modalOverlay:{
+      width: '100%',
+    },
+    medals:{
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'red',
+      borderWidth: 1,
+      borderRadius: 5,
+
+    },
+    medalBox:{
+      margin: 5,
+      borderWidth: 1,
+      borderRadius: 5,
+      width: '30%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    
     squaresContainer: {
       flexDirection: 'row',
       width: '100%',
