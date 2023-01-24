@@ -14,6 +14,7 @@ import React, {
   import { MaterialIcons, Entypo, FontAwesome5, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
   import StatusBar from './MyStatusBar';
+  import { ScrollView } from 'react-native-gesture-handler';
   
   
   
@@ -135,7 +136,7 @@ import React, {
       deadliftInputRef.current.focus();
     };
 
-
+//for the max of each values
     const extractMaxValues = () => {
       let maxValues = {};
       data.forEach(item => {
@@ -148,6 +149,9 @@ import React, {
           if(!maxValues.deadlift || item.deadlift > maxValues.deadlift) {
               maxValues.deadlift = item.deadlift;
           }
+          if(!maxValues.total || item.total > maxValues.total) {
+            maxValues.total = item.total;
+        }
       });
       return maxValues;
   }
@@ -162,6 +166,12 @@ import React, {
   
   let filteredData = data;
   filteredData = filteredData.slice(data.length-10); // limit to 10 values
+
+//for the inputs in the modal
+  const [inputValueSquat, setInputValueSquat] = useState(0);
+  const [inputValueBench, setInputValueBench] = useState(0);
+  const [inputValueDeadlift, setInputValueDeadlift] = useState(0);
+
 
   
     
@@ -182,14 +192,48 @@ import React, {
         </TouchableOpacity>
 
           <Modal visible={modalVisible}>
+            <ScrollView>
               <View style={styles.modalOverlay}>
                   <TouchableOpacity onPress={() => setModalVisible(false)}>
                   <AntDesign name="back" size={32} color="#97A4B3" />
                   </TouchableOpacity>
                   <Text>Goals</Text>
                   <Text>Max Squat : {maxValues.squat}</Text>
+                  <TextInput
+                    value={inputValueSquat}
+                    onChangeText={text => setInputValueSquat(text)}
+                  />
+                  <View
+                    style={{
+                      width: `${( maxValues.squat / inputValueSquat ) * 100}%`,
+                      height: 20,
+                      backgroundColor: 'blue'
+                    }}
+                  />
                   <Text>Max Bench : {maxValues.bench}</Text>
+                  <TextInput
+                    value={inputValueBench}
+                    onChangeText={text => setInputValueBench(text)}
+                  />
+                  <View
+                    style={{
+                      width: `${( maxValues.bench / inputValueBench ) * 100}%`,
+                      height: 20,
+                      backgroundColor: 'blue'
+                    }}
+                  />
                   <Text>Max Deadlift : {maxValues.deadlift}</Text>
+                  <TextInput
+                    value={inputValueDeadlift}
+                    onChangeText={text => setInputValueDeadlift(text)}
+                  />
+                  <View
+                    style={{
+                      width: `${( maxValues.deadlift / inputValueDeadlift ) * 100}%`,
+                      height: 20,
+                      backgroundColor: 'blue'
+                    }}
+                  />
 
                   <Text>Achievements</Text>
                   <View style={styles.medals}>
@@ -277,6 +321,7 @@ import React, {
                     </View>
                   </View>
               </View>
+              </ScrollView>
           </Modal>
 
         <View style={styles.squaresContainer}>
