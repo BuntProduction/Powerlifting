@@ -321,7 +321,7 @@ import React, {
     if (maxSquat >= 250) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -454,7 +454,7 @@ import React, {
     if (maxBench >= 180) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -587,7 +587,7 @@ import React, {
     if (maxDeadlift >= 300) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -606,6 +606,19 @@ import React, {
     );
   }
   //end of image part////////////////////////////////////////////////////////////////////////////////
+  const loadingBar1 = React.useRef(null);
+  const loadingBar2 = React.useRef(null);
+  const loadingBar3 = React.useRef(null);
+
+  const handleLoadingBar1 = () => {
+    loadingBar1.current.focus();
+  };
+  const handleLoadingBar2 = () => {
+    loadingBar2.current.focus();
+  };
+  const handleLoadingBar3 = () => {
+    loadingBar3.current.focus();
+  };
 
     return (
   
@@ -620,25 +633,38 @@ import React, {
             marginTop: -30
                 }}/>
         <TouchableOpacity style={styles.trophyButton} onPress={() => setModalVisible(true)}>
-        <FontAwesome5 name='trophy' size={24} color={'#97A4B3'} />
+          <FontAwesome5 name='trophy' size={24} color={'#97A4B3'} />
         </TouchableOpacity>
 
           <Modal visible={modalVisible}>
             <ScrollView>
               <View style={styles.modalOverlay}>
-                  <TouchableOpacity onPress={() => setModalVisible(false)}>
-                  <AntDesign name="back" size={32} color="#97A4B3" />
+                  <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.backButton}>
+                    <AntDesign name="back" size={32} color="#97A4B3" />
                   </TouchableOpacity>
                   <View style={styles.goalsContainer}>
                       <Text style={styles.titleModal}>Goals</Text>
-                      
+
+                  <TouchableOpacity onPress={handleLoadingBar1}>  
                   <View style={styles.goalsTextContainer}>
-                    <Text>Max Squat : {maxValues.squat}</Text>
-                    <Text>Goal:</Text>
+                  
+                    <Text style={styles.textGoal3}>Max Squat : {maxValues.squat}</Text>
+                    <Text style={styles.textGoal}>Goal : </Text>
                     <TextInput
+                    ref={loadingBar1}
+                      defaultValue={'0'}
                       value={inputValueSquat}
-                      onChangeText={handleSquatChange2}
+                      onChangeText={(text) => {
+                        if (text.length <= 3) {
+                            handleSquatChange2(text);
+                        }
+                    }}
                       keyboardType='numeric'
+                      onFocus={() => {
+                        if (inputValueSquat === '0') {
+                          setInputValueSquat('');
+                        }
+                      }}
                     />
                   </View>
                   <View style={styles.progressBarContainer}>
@@ -646,16 +672,33 @@ import React, {
                     style={{
                       width: `${( maxValues.squat / inputValueSquat ) * 100}%`,
                       height: 10,
-                      backgroundColor: '#fca11c'
+                      backgroundColor: '#fca11c',
+                      borderRadius: 10
                     }}
                   />
+                  
                   </View>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={handleLoadingBar2}>
+
                   <View style={styles.goalsTextContainer}>
-                    <Text>Max Bench : {maxValues.bench}</Text>
-                    <Text>Goal:</Text>
+                    <Text style={styles.textGoal3}>Max Bench : {maxValues.bench}</Text>
+                    <Text style={styles.textGoal}>Goal : </Text>
                     <TextInput
+                      ref={loadingBar2}
+                      defaultValue={'0'}
                       value={inputValueBench}
-                      onChangeText={handleBenchChange2}
+                      onChangeText={(text) => {
+                        if (text.length <= 3) {
+                            handleBenchChange2(text);
+                        }
+                    }}
+                      onFocus={() => {
+                        if (inputValueBench === '0') {
+                          setInputValueBench('');
+                        }
+                      }}
                       keyboardType='numeric'
                     />
                   </View>
@@ -665,31 +708,50 @@ import React, {
                     style={{
                       width: `${( maxValues.bench / inputValueBench ) * 100}%`,
                       height: 10,
-                      backgroundColor: '#fca11c'
+                      backgroundColor: '#fca11c',
+                      borderRadius: 10
                     }}
                   />
                   </View>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={handleLoadingBar3}>
+
                   <View style={styles.goalsTextContainer}>
-                    <Text>Max Deadlift : {maxValues.deadlift}</Text>
-                    <Text>Goal:</Text>
+                    <Text style={styles.textGoal3}>Max Deadlift : {maxValues.deadlift}</Text>
+                    <Text style={styles.textGoal2}>Goal : </Text>
                     <TextInput
+                      ref={loadingBar3}
+                      defaultValue={'0'}
                       value={inputValueDeadlift}
-                      onChangeText={handleDeadliftChange2}
+                      onChangeText={(text) => {
+                        if (text.length <= 3) {
+                          handleDeadliftChange2(text);
+                        }
+                    }}
                       keyboardType='numeric'
+                      onFocus={() => {
+                        if (inputValueDeadlift === '0') {
+                          setInputValueDeadlift('');
+                        }
+                      }}
                     />
                   </View>
+                  </TouchableOpacity>
 
                   <View style={styles.progressBarContainer}>
                   <View
                     style={{
                       width: `${( maxValues.deadlift / inputValueDeadlift ) * 100}%`,
                       height: 10,
-                      backgroundColor: '#fca11c'
+                      backgroundColor: '#fca11c',
+                      borderRadius: 10,
                     }}
                   />
                   </View>
                   </View>
-                  <Text style={styles.titleModal}>Achievements</Text>
+                  <Text style={styles.titleModal2}>Achievements</Text>
+                  <Text style={{textAlign: 'center', fontStyle: 'italic', marginBottom: 25}}>Improve your scores and unlock all the medals !</Text>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
                       <WeightBronze maxSquat={maxValues.squat}/>
@@ -775,6 +837,7 @@ import React, {
                     </View>
                   </View>
               </View>
+              <View style={styles.spaceUnder}></View>
               </ScrollView>
           </Modal>
 
@@ -941,19 +1004,58 @@ import React, {
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'row',
-
+      marginBottom: 5,
+      marginTop: 5
+    },
+    backButton:{
+      width: 45,
+      height: 45,
+      left: '3%',
+      top: '0.5%',
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 45,
+      padding: 5,
+      elevation: 4,
+      backgroundColor: 'white'
     },
     titleModal:{
       justifyContent: 'center',
       textAlign: 'center',
       fontWeight: 'bold',
-      fontSize: 30
+      fontSize: 30,
+      marginBottom: 30,
+      marginTop: -5
+    },
+    titleModal2:{
+      justifyContent: 'center',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 30,
+      marginBottom: 30,
+      marginTop: 30
     },
     progressBarContainer:{
       marginLeft: '10%',
       width: '80%',
       backgroundColor: '#97A4B3',
-      height: 10
+      height: 10,
+      borderRadius: 10,
+
+    },
+    textGoal:{
+      marginLeft: '30%',
+      fontWeight: 'bold'
+
+    },
+    
+    textGoal2:{
+      marginLeft: '26%',
+      fontWeight: 'bold'
+
+    },
+    textGoal3:{
+      fontWeight: 'bold'
     },
     modalOverlay:{
       width: '100%',
@@ -980,10 +1082,14 @@ import React, {
       backgroundColor: 'white',
       margin: 5,
       borderRadius: 5,
-      activeOpacity: 1
+      activeOpacity: 1,
+      marginBottom: '3%'
     },
     medalText:{
       fontWeight: 'bold'
+    },
+    spaceUnder:{
+      marginBottom: 50
     },
     
     squaresContainer: {
