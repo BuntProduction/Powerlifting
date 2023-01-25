@@ -173,8 +173,440 @@ import React, {
   const [inputValueDeadlift, setInputValueDeadlift] = useState(0);
 
 
+  const handleSquatChange2 = async (text) => {
+    setInputValueSquat(text);
+    await AsyncStorage.setItem('inputValueSquat', text);
+  }
+
+  const handleBenchChange2 = async (text) => {
+    setInputValueBench(text);
+    await AsyncStorage.setItem('inputValueBench', text);
+  }
+
+  const handleDeadliftChange2 = async (text) => {
+    setInputValueDeadlift(text);
+    await AsyncStorage.setItem('inputValueDeadlift', text);
+  }
+
+  useEffect(() => {
+    AsyncStorage.getItem('inputValueSquat').then(value => {
+        if(value){
+          setInputValueSquat(value);
+        }
+    });
+    AsyncStorage.getItem('inputValueBench').then(value => {
+        if(value){
+          setInputValueBench(value);
+        }
+    });
+    AsyncStorage.getItem('inputValueDeadlift').then(value => {
+        if(value){
+          setInputValueDeadlift(value);
+        }
+    });
+  }, []);
+
+  //image part////////////////////////////////////////////////////////////////////////////////
+  const mapMaxSquatToOpacity = (maxSquat) => {
+    if (maxSquat >= 50) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
   
-    
+  const WeightBronze = (props) => {
+    const opacity = mapMaxSquatToOpacity(props.maxSquat);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightBronze.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxSquatToOpacity2 = (maxSquat) => {
+    if (maxSquat >= 100) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightSilver = (props) => {
+    const opacity = mapMaxSquatToOpacity2(props.maxSquat);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightSilver.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxSquatToOpacity3 = (maxSquat) => {
+    if (maxSquat >= 150) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightGold = (props) => {
+    const opacity = mapMaxSquatToOpacity3(props.maxSquat);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightGold.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxSquatToOpacity4 = (maxSquat) => {
+    if (maxSquat >= 200) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightSaphire = (props) => {
+    const opacity = mapMaxSquatToOpacity4(props.maxSquat);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightSaphire.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxSquatToOpacity5 = (maxSquat) => {
+    if (maxSquat >= 225) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightRuby = (props) => {
+    const opacity = mapMaxSquatToOpacity5(props.maxSquat);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightRuby.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxSquatToOpacity6 = (maxSquat) => {
+    if (maxSquat >= 250) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightBlack = (props) => {
+    const opacity = mapMaxSquatToOpacity6(props.maxSquat);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightBlack.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+
+  const mapMaxBenchToOpacity = (maxBench) => {
+    if (maxBench >= 50) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightBronzeBench = (props) => {
+    const opacity = mapMaxBenchToOpacity(props.maxBench);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightBronzeBench.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxBenchToOpacity2 = (maxBench) => {
+    if (maxBench >= 80) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightSilverBench = (props) => {
+    const opacity = mapMaxBenchToOpacity2(props.maxBench);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightSilverBench.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxBenchToOpacity3 = (maxBench) => {
+    if (maxBench >= 100) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightGoldBench = (props) => {
+    const opacity = mapMaxBenchToOpacity3(props.maxBench);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightGoldBench.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxBenchToOpacity4 = (maxBench) => {
+    if (maxBench >= 130) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightSaphireBench = (props) => {
+    const opacity = mapMaxBenchToOpacity4(props.maxBench);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightSaphireBench.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxBenchToOpacity5 = (maxBench) => {
+    if (maxBench >= 150) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightRubyBench = (props) => {
+    const opacity = mapMaxBenchToOpacity5(props.maxBench);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightRubyBench.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxBenchToOpacity6 = (maxBench) => {
+    if (maxBench >= 180) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightBlackBench = (props) => {
+    const opacity = mapMaxBenchToOpacity6(props.maxBench);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightBlackBench.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+
+  const mapMaxDeadliftToOpacity = (maxDeadlift) => {
+    if (maxDeadlift >= 50) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightBronzeDeadlift = (props) => {
+    const opacity = mapMaxDeadliftToOpacity(props.maxDeadlift);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightBronzeDeadlift.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxDeadliftToOpacity2 = (maxDeadlift) => {
+    if (maxDeadlift >= 100) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightSilverDeadlift = (props) => {
+    const opacity = mapMaxDeadliftToOpacity2(props.maxDeadlift);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightSilverDeadlift.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxDeadliftToOpacity3 = (maxDeadlift) => {
+    if (maxDeadlift >= 150) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightGoldDeadlift = (props) => {
+    const opacity = mapMaxDeadliftToOpacity3(props.maxDeadlift);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightGoldDeadlift.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxDeadliftToOpacity4 = (maxDeadlift) => {
+    if (maxDeadlift >= 200) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightSaphireDeadlift = (props) => {
+    const opacity = mapMaxDeadliftToOpacity4(props.maxDeadlift);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightSaphireDeadlift.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxDeadliftToOpacity5 = (maxDeadlift) => {
+    if (maxDeadlift >= 250) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightRubyDeadlift = (props) => {
+    const opacity = mapMaxDeadliftToOpacity5(props.maxDeadlift);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightRubyDeadlift.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  const mapMaxDeadliftToOpacity6 = (maxDeadlift) => {
+    if (maxDeadlift >= 300) {
+      return 1;
+    } else {
+      return 0.2;
+    }
+  }
+  
+  const WeightBlackDeadlift = (props) => {
+    const opacity = mapMaxDeadliftToOpacity6(props.maxDeadlift);
+  
+    return (
+      <Image
+        source={require('./img/medals/weightBlackDeadlift.png')}
+        style={{ 
+          width: 90,
+          height: 90,
+          resizeMode: 'contain',
+          opacity: opacity }}
+      />
+    );
+  }
+  //end of image part////////////////////////////////////////////////////////////////////////////////
+
     return (
   
       
@@ -197,127 +629,149 @@ import React, {
                   <TouchableOpacity onPress={() => setModalVisible(false)}>
                   <AntDesign name="back" size={32} color="#97A4B3" />
                   </TouchableOpacity>
-                  <Text>Goals</Text>
-                  <Text>Max Squat : {maxValues.squat}</Text>
-                  <TextInput
-                    value={inputValueSquat}
-                    onChangeText={text => setInputValueSquat(text)}
-                  />
+                  <View style={styles.goalsContainer}>
+                      <Text style={styles.titleModal}>Goals</Text>
+                      
+                  <View style={styles.goalsTextContainer}>
+                    <Text>Max Squat : {maxValues.squat}</Text>
+                    <Text>Goal:</Text>
+                    <TextInput
+                      value={inputValueSquat}
+                      onChangeText={handleSquatChange2}
+                      keyboardType='numeric'
+                    />
+                  </View>
+                  <View style={styles.progressBarContainer}>
                   <View
                     style={{
                       width: `${( maxValues.squat / inputValueSquat ) * 100}%`,
-                      height: 20,
-                      backgroundColor: 'blue'
+                      height: 10,
+                      backgroundColor: '#fca11c'
                     }}
                   />
-                  <Text>Max Bench : {maxValues.bench}</Text>
-                  <TextInput
-                    value={inputValueBench}
-                    onChangeText={text => setInputValueBench(text)}
-                  />
+                  </View>
+                  <View style={styles.goalsTextContainer}>
+                    <Text>Max Bench : {maxValues.bench}</Text>
+                    <Text>Goal:</Text>
+                    <TextInput
+                      value={inputValueBench}
+                      onChangeText={handleBenchChange2}
+                      keyboardType='numeric'
+                    />
+                  </View>
+                  <View style={styles.progressBarContainer}>
+                  
                   <View
                     style={{
                       width: `${( maxValues.bench / inputValueBench ) * 100}%`,
-                      height: 20,
-                      backgroundColor: 'blue'
+                      height: 10,
+                      backgroundColor: '#fca11c'
                     }}
                   />
-                  <Text>Max Deadlift : {maxValues.deadlift}</Text>
-                  <TextInput
-                    value={inputValueDeadlift}
-                    onChangeText={text => setInputValueDeadlift(text)}
-                  />
+                  </View>
+                  <View style={styles.goalsTextContainer}>
+                    <Text>Max Deadlift : {maxValues.deadlift}</Text>
+                    <Text>Goal:</Text>
+                    <TextInput
+                      value={inputValueDeadlift}
+                      onChangeText={handleDeadliftChange2}
+                      keyboardType='numeric'
+                    />
+                  </View>
+
+                  <View style={styles.progressBarContainer}>
                   <View
                     style={{
                       width: `${( maxValues.deadlift / inputValueDeadlift ) * 100}%`,
-                      height: 20,
-                      backgroundColor: 'blue'
+                      height: 10,
+                      backgroundColor: '#fca11c'
                     }}
                   />
-
-                  <Text>Achievements</Text>
+                  </View>
+                  </View>
+                  <Text style={styles.titleModal}>Achievements</Text>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
-                      <Text>Squat 50kg</Text>
+                      <WeightBronze maxSquat={maxValues.squat}/>
+                      <Text style={styles.medalText}>Squat 50kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
-                      <Text>Squat 100kg</Text>
+                    <WeightSilver maxSquat={maxValues.squat}/>
+                      <Text style={styles.medalText}>Squat 100kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
-                      <Text>Squat 150kg</Text>
+                    <WeightGold maxSquat={maxValues.squat}/>
+                      <Text style={styles.medalText}>Squat 150kg</Text>
                     </View>
                   </View>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
-                      <Text>Squat 200kg</Text>
+                    <WeightSaphire maxSquat={maxValues.squat}/>
+                      <Text style={styles.medalText}>Squat 200kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
-                      <Text>Squat 225kg</Text>
+                    <WeightRuby maxSquat={maxValues.squat}/>
+                      <Text style={styles.medalText}>Squat 225kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
-                      <Text>Squat 250kg</Text>
-                    </View>
-                  </View>
-                  <View style={styles.medals}>
-                    <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
-                      <Text>Bench 50kg</Text>
-                    </View>
-                    <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
-                      <Text>Bench 80kg</Text>
-                    </View>
-                    <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
-                      <Text>Bench 100kg</Text>
+                    <WeightBlack maxSquat={maxValues.squat}/>
+                      <Text style={styles.medalText}>Squat 250kg</Text>
                     </View>
                   </View>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
-                      <Text>Bench 130kg</Text>
+                    <WeightBronzeBench maxBench={maxValues.bench}/>
+                      <Text style={styles.medalText}>Bench 50kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
-                      <Text>Bench 150kg</Text>
+                    <WeightSilverBench maxBench={maxValues.bench}/>
+                      <Text style={styles.medalText}>Bench 80kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
-                      <Text>Bench 180kg</Text>
-                    </View>
-                  </View>
-                  <View style={styles.medals}>
-                    <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
-                      <Text>Deadlift 50kg</Text>
-                    </View>
-                    <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
-                      <Text>Deadlift 100kg</Text>
-                    </View>
-                    <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
-                      <Text>Deadlift 150kg</Text>
+                    <WeightGoldBench maxBench={maxValues.bench}/>
+                      <Text style={styles.medalText}>Bench 100kg</Text>
                     </View>
                   </View>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(205,127,50,1)"/>
-                      <Text>Deadlift 200kg</Text>
+                    <WeightSaphireBench maxBench={maxValues.bench}/>
+                      <Text style={styles.medalText}>Bench 130kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(192,192,192,1)"/>
-                      <Text>Deadlift 250kg</Text>
+                    <WeightRubyBench maxBench={maxValues.bench}/>
+                      <Text style={styles.medalText}>Bench 150kg</Text>
                     </View>
                     <View  style={styles.medalBox}>
-                      <MaterialCommunityIcons name="medal" size={100} color="rgba(255,215,0,1)"/>
-                      <Text>Deadlift 300kg</Text>
+                    <WeightBlackBench maxBench={maxValues.bench}/>
+                      <Text style={styles.medalText}>Bench 180kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                    <WeightBronzeDeadlift maxDeadlift={maxValues.deadlift}/>
+                      <Text style={styles.medalText}>Deadlift 50kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                    <WeightSilverDeadlift maxDeadlift={maxValues.deadlift}/>
+                      <Text style={styles.medalText}>Deadlift 100kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                    <WeightGoldDeadlift maxDeadlift={maxValues.deadlift}/>
+                      <Text style={styles.medalText}>Deadlift 150kg</Text>
+                    </View>
+                  </View>
+                  <View style={styles.medals}>
+                    <View  style={styles.medalBox}>
+                    <WeightSaphireDeadlift maxDeadlift={maxValues.deadlift}/>
+                      <Text style={styles.medalText}>Deadlift 200kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                    <WeightRubyDeadlift maxDeadlift={maxValues.deadlift}/>
+                      <Text style={styles.medalText}>Deadlift 250kg</Text>
+                    </View>
+                    <View  style={styles.medalBox}>
+                    <WeightBlackDeadlift maxDeadlift={maxValues.deadlift}/>
+                      <Text style={styles.medalText}>Deadlift 300kg</Text>
                     </View>
                   </View>
               </View>
@@ -481,6 +935,26 @@ import React, {
       top: '11%',
       right: '5%',
     },
+    goalsContainer:{
+    },
+    goalsTextContainer:{
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+
+    },
+    titleModal:{
+      justifyContent: 'center',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 30
+    },
+    progressBarContainer:{
+      marginLeft: '10%',
+      width: '80%',
+      backgroundColor: '#97A4B3',
+      height: 10
+    },
     modalOverlay:{
       width: '100%',
     },
@@ -488,18 +962,28 @@ import React, {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'red',
-      borderWidth: 1,
-      borderRadius: 5,
+      
 
     },
     medalBox:{
-      margin: 5,
-      borderWidth: 1,
-      borderRadius: 5,
+      shadowColor: 'black',
+      shadowOffset: { 
+        width: 0, 
+        height: 11 },
+      shadowOpacity: 0.16,
+     shadowRadius: 16,
+      elevation: 4,
       width: '30%',
-      justifyContent: 'center',
+      aspectRatio: 1,
       alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      margin: 5,
+      borderRadius: 5,
+      activeOpacity: 1
+    },
+    medalText:{
+      fontWeight: 'bold'
     },
     
     squaresContainer: {
