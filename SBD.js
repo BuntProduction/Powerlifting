@@ -225,19 +225,6 @@ import React, {
     return true;
   }
 
-  const navigation = useNavigation();
-
-    useEffect(() => {
-      navigation.addListener('swipe', e => {
-        if (e.direction === 'left') {
-          setModalVisible(false);
-        }
-        if (e.direction === 'right') {
-          setModalVisible(false);
-        }
-      });
-      return () => navigation.removeListener('swipe');
-    }, []);
 
 
   //end of back button part
@@ -709,7 +696,7 @@ import React, {
                   <View style={styles.progressBarContainer}>
                   <View
                     style={{
-                      width: `${( maxValues.squat / inputValueSquat ) * 100}%`,
+                      width: `${(inputValueSquat < maxValues.squat ? inputValueSquat : maxValues.squat) / inputValueSquat * 100}%`,
                       height: 10,
                       backgroundColor: '#fca11c',
                       borderRadius: 10
