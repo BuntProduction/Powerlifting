@@ -9,7 +9,7 @@ import StreetLifting from './StreetLifting';
 import Weight from './Weight';
 import SettingsScreen from './SettingsScreen';
 //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
-import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons, MaterialCommunityIcons, Fontisto  } from '@expo/vector-icons';
 const App = () => {
 
   const Tab = createBottomTabNavigator();
@@ -86,7 +86,7 @@ const App = () => {
       component={SettingsScreen} 
       options={{ 
         tabBarIcon: ({ focused, color, size }) => {
-          return <Ionicons name='md-settings' size={size} color={focused ? colorIconFocused : colorIcon} />;
+          return <Fontisto name='calculator' size={size} color={focused ? colorIconFocused : colorIcon} />;
         },
         headerShown: false }}/>
     </Tab.Navigator>
