@@ -28,7 +28,7 @@ const App = () => {
       },
       tabBarStyle: {
         position: 'absolute',
-        bottom: 25,
+        bottom: '3%',
         left: 20,
         right: 20,
         backgroundColor: 'white',

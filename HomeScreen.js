@@ -68,11 +68,14 @@ const HomeScreen = () => {
     if (!isRunning) {
       setIsRunning(true);
       const id = setInterval(() => {
-        setTimeLeft(prevTime => prevTime - 1);
-        if (timeLeft <= 0) {
-          clearInterval(id);
-          setIsRunning(false);
-        }
+        setTimeLeft(prevTime => {
+          if (prevTime <= 0) {
+            clearInterval(id);
+            setIsRunning(false);
+            handleResetPress()
+          }
+          return prevTime - 1
+        });
       }, 1000);
       setTimerId(id);
     }
@@ -110,6 +113,8 @@ const HomeScreen = () => {
       deadliftInputRef.current.focus();
     };
 
+    
+
 
   return (
     
@@ -120,7 +125,7 @@ const HomeScreen = () => {
           style={{  width: 140,
                     height: 140,
                     resizeMode: 'contain',
-                    marginTop: -30
+                    marginTop: '-10%'
                 }}/>
       <View style={styles.inputView}>
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleSquatPress}>
@@ -266,7 +271,7 @@ const styles = StyleSheet.create({
   width: '100%',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: 20,
+  marginTop: '1%',
   
   },
   timerContainerContainer: {
@@ -279,23 +284,23 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   timerNumber: {
-    fontSize: 50
+    fontSize: 50,
   },
   timerLogoContainer: {
-        flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'space-between',
     shadowColor: 'black',
-  shadowOffset: { 
-    width: 0, 
-    height: 11 },
-  shadowOpacity: 0.16,
-  shadowRadius: 16,
-  elevation: 4,
-  backgroundColor: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: 10,
-  borderRadius: 46,
+    shadowOffset: { 
+      width: 0, 
+      height: 11 },
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    elevation: 4,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '2%',
+    borderRadius: 46,
   },
   timerLogos: {
     margin: 10

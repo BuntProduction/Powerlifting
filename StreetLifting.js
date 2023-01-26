@@ -136,9 +136,11 @@ import React, {
       setTotal(newTotal);
     }, [dips, traction, muscleup]);
 
+    
     let filteredData2 = data2;
-    filteredData2 = filteredData2.slice(data2.length-10); // limit to 10 values
-  
+    if (data2.length > 9) {
+        filteredData2 = data2.slice(data2.length-9); //limit to 9 values in the graph
+    }
     
     return (
   
@@ -150,7 +152,7 @@ import React, {
           style={{  width: 140,
             height: 140,
             resizeMode: 'contain',
-            marginTop: -30
+            marginTop: '-10%'
                 }}/>
         
         <View style={styles.squaresContainer}>
@@ -228,7 +230,7 @@ import React, {
           {showLineChart2 && 
         <LineChart
           data={{
-            labels: filteredData2.map(item => item.date),
+            labels: filteredData2.map(item => item.date.slice(0, -3)),
             datasets: [
               {
                 data: filteredData2.map(item => item.dips),
@@ -381,9 +383,6 @@ import React, {
       fontStyle:'italic',
       fontSize: 15,
     },
-    buttonDelete: {
-      color: 'red',
-    },
     tableRow: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -391,7 +390,7 @@ import React, {
       borderWidth: 1,
       borderColor: 'white',
       padding: 10,
-      marginTop: 10,
+      marginTop: '2%',
       width: '100%',
       elevation: 4,
       shadowColor: 'rgba(0, 0, 0, 0.7)',

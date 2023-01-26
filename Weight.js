@@ -87,8 +87,11 @@ const Weight = () => {
       await AsyncStorage.setItem('data3', JSON.stringify(newData3));
     }
 
+    
     let filteredData3 = data3;
-    filteredData3 = filteredData3.slice(data3.length-10); // limit to 10 values
+    if (data3.length > 9) {
+        filteredData3 = data3.slice(data3.length-9); //limit to 9 values in the graph
+    }
 
   return (
     <View style={styles.container}>
@@ -98,7 +101,7 @@ const Weight = () => {
           style={{  width: 140,
             height: 140,
             resizeMode: 'contain',
-            marginTop: -30
+            marginTop: '-10%'
                 }}/>
 
         <View style={styles.squaresContainer}>
@@ -139,7 +142,7 @@ const Weight = () => {
           {showLineChart3 && 
         <LineChart
           data={{
-            labels: filteredData3.map(item => item.date),
+            labels: filteredData3.map(item => item.date.slice(0, -3)),
             datasets: [
               {
                 data: filteredData3.map(item => item.weight),

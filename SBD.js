@@ -3,7 +3,7 @@ import React, {
     useEffect
   } from 'react';
   import { 
-    View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions, Image, Pressable, Modal
+    View, Text, StyleSheet, TouchableOpacity, TextInput , FlatList, Dimensions, Image, Pressable, Modal, BackHandler
   } from 'react-native';
   import AsyncStorage from '@react-native-async-storage/async-storage';
   import 'react-native-get-random-values';
@@ -15,7 +15,8 @@ import React, {
 
   import StatusBar from './MyStatusBar';
   import { ScrollView } from 'react-native-gesture-handler';
-  
+  import { useNavigation } from '@react-navigation/native';
+
   
   
   //For example, you can pass down the data, squat, bench, deadlift, and handleTotal functions from the App component as props to the InputForm component, and use them within the InputForm component to update the AsyncStorage and the state of the App component.
@@ -165,7 +166,9 @@ import React, {
   }, [squat, bench, deadlift]); // to addition the data before the save button
   
   let filteredData = data;
-  filteredData = filteredData.slice(data.length-10); // limit to 10 values
+  if (data.length > 9) {
+      filteredData = data.slice(data.length-9); //limit to 9 values in the graph
+  }
 
 //for the inputs in the modal
   const [inputValueSquat, setInputValueSquat] = useState(0);
@@ -205,6 +208,39 @@ import React, {
         }
     });
   }, []);
+
+
+  // Back button part
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress
+    );
+    return () => backHandler.remove();
+  }, []);
+
+  function handleBackPress() {
+    setModalVisible(false);
+    return true;
+  }
+
+  const navigation = useNavigation();
+
+    useEffect(() => {
+      navigation.addListener('swipe', e => {
+        if (e.direction === 'left') {
+          setModalVisible(false);
+        }
+        if (e.direction === 'right') {
+          setModalVisible(false);
+        }
+      });
+      return () => navigation.removeListener('swipe');
+    }, []);
+
+
+  //end of back button part
 
   //image part////////////////////////////////////////////////////////////////////////////////
   const mapMaxSquatToOpacity = (maxSquat) => {
@@ -321,7 +357,7 @@ import React, {
     if (maxSquat >= 250) {
       return 1;
     } else {
-      return 0.15;
+      return 0.12;
     }
   }
   
@@ -454,7 +490,7 @@ import React, {
     if (maxBench >= 180) {
       return 1;
     } else {
-      return 0.15;
+      return 0.12;
     }
   }
   
@@ -587,7 +623,7 @@ import React, {
     if (maxDeadlift >= 300) {
       return 1;
     } else {
-      return 0.15;
+      return 0.12;
     }
   }
   
@@ -606,6 +642,8 @@ import React, {
     );
   }
   //end of image part////////////////////////////////////////////////////////////////////////////////
+  
+  //part to focus the input with the loading bar
   const loadingBar1 = React.useRef(null);
   const loadingBar2 = React.useRef(null);
   const loadingBar3 = React.useRef(null);
@@ -619,6 +657,7 @@ import React, {
   const handleLoadingBar3 = () => {
     loadingBar3.current.focus();
   };
+  //end of the focus part
 
     return (
   
@@ -630,7 +669,7 @@ import React, {
           style={{  width: 140,
             height: 140,
             resizeMode: 'contain',
-            marginTop: -30
+            marginTop: '-10%'
                 }}/>
         <TouchableOpacity style={styles.trophyButton} onPress={() => setModalVisible(true)}>
           <FontAwesome5 name='trophy' size={24} color={'#97A4B3'} />
@@ -752,6 +791,8 @@ import React, {
                   </View>
                   <Text style={styles.titleModal2}>Achievements</Text>
                   <Text style={{textAlign: 'center', fontStyle: 'italic', marginBottom: 25}}>Improve your scores and unlock all the medals !</Text>
+                  
+                  <Text style={styles.titleCategories}>Squat</Text>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
                       <WeightBronze maxSquat={maxValues.squat}/>
@@ -780,6 +821,7 @@ import React, {
                       <Text style={styles.medalText}>Squat 250kg</Text>
                     </View>
                   </View>
+                  <Text style={styles.titleCategories}>Bench</Text>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
                     <WeightBronzeBench maxBench={maxValues.bench}/>
@@ -808,6 +850,7 @@ import React, {
                       <Text style={styles.medalText}>Bench 180kg</Text>
                     </View>
                   </View>
+                  <Text style={styles.titleCategories}>Deadlift</Text>
                   <View style={styles.medals}>
                     <View  style={styles.medalBox}>
                     <WeightBronzeDeadlift maxDeadlift={maxValues.deadlift}/>
@@ -918,7 +961,7 @@ import React, {
           {showLineChart && 
         <LineChart
           data={{
-            labels: filteredData.map(item => item.date),
+            labels: filteredData.map(item => item.date.slice(0, -3)),
             datasets: [
               {
                 data: filteredData.map(item => item.squat),
@@ -1088,6 +1131,11 @@ import React, {
     medalText:{
       fontWeight: 'bold'
     },
+    titleCategories:{
+      margin: '5%',
+      fontSize: 23,
+      fontWeight: 'bold'
+    },
     spaceUnder:{
       marginBottom: 50
     },
@@ -1183,7 +1231,7 @@ import React, {
       borderWidth: 1,
       borderColor: 'white',
       padding: 10,
-      marginTop: 10,
+      marginTop: '2%',
       width: '100%',
       elevation: 4,
       shadowColor: 'rgba(0, 0, 0, 0.7)',
