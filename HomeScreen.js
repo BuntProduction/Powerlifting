@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Feather, AntDesign } from '@expo/vector-icons';
 
 import { useWindowDimensions } from 'react-native';
 import StatusBar from './MyStatusBar';
@@ -113,7 +113,19 @@ const HomeScreen = () => {
       deadliftInputRef.current.focus();
     };
 
-    
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible2, setIsModalVisible2] = useState(false);
+    const [isModalVisible3, setIsModalVisible3] = useState(false);
+    const toggleModal = () => {
+      setIsModalVisible(!isModalVisible);
+      };
+    const toggleModal2 = () => {
+        setIsModalVisible2(!isModalVisible2);
+        };
+    const toggleModal3 = () => {
+          setIsModalVisible3(!isModalVisible3);
+          };
 
 
   return (
@@ -127,14 +139,77 @@ const HomeScreen = () => {
                     resizeMode: 'contain',
                     marginTop: '-10%'
                 }}/>
+
+      {isModalVisible && (
+          <View style={styles.percentageStyle}>
+          <View style={{ width: '50%', height: '60%' }}>
+            <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
+            {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
+              <View key={percentage}>
+                <Text>{percentage}% <Text>{(squat * percentage) / 100}</Text></Text>
+                
+              </View>
+            ))}
+          </View>
+          <TouchableOpacity onPress={toggleModal} style={styles.closeButton}>
+            <AntDesign name="close" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        )}
+
+{isModalVisible2 && (
+          <View style={styles.percentageStyle}>
+          <View style={{ width: '50%', height: '60%' }}>
+            <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
+            {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
+              <View key={percentage}>
+                <Text>{percentage}% <Text>{(bench * percentage) / 100}</Text></Text>
+                
+              </View>
+            ))}
+          </View>
+          <TouchableOpacity onPress={toggleModal2} style={styles.closeButton}>
+            <AntDesign name="close" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        )}
+
+{isModalVisible3 && (
+          <View style={styles.percentageStyle}>
+          <View style={{ width: '50%', height: '60%' }}>
+            <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
+            {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
+              <View key={percentage}>
+                <Text>{percentage}% <Text>{(deadlift * percentage) / 100}</Text></Text>
+                
+              </View>
+            ))}
+          </View>
+          <TouchableOpacity onPress={toggleModal3} style={styles.closeButton}>
+            <AntDesign name="close" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        )}
+        
       <View style={styles.inputView}>
+        
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleSquatPress}>
+      
+      <TouchableOpacity
+        onPress={() => setIsModalVisible(!isModalVisible)}
+        style={styles.percentageInSquare}>
+
+          <Feather name="percent" size={24} color="black" />
+
+      </TouchableOpacity>
+
       <Image source={
           require('./img/Squat.png')} 
           style={{  width: 120,
                     height: 120,
                     resizeMode: 'contain',
                 }}/>
+
         <View style={styles.inputTextContainer}>
         <TextInput
           ref={squatInputRef}
@@ -148,6 +223,13 @@ const HomeScreen = () => {
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleBenchPress}>
+      <TouchableOpacity
+        onPress={() => setIsModalVisible2(!isModalVisible2)}
+        style={styles.percentageInSquare}>
+
+          <Feather name="percent" size={24} color="black" />
+
+      </TouchableOpacity>
       <Image source={
           require('./img/Bench.png')} 
           style={{  width: 120,
@@ -166,6 +248,13 @@ const HomeScreen = () => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleDeadliftPress}>
+      <TouchableOpacity
+        onPress={() => setIsModalVisible3(!isModalVisible3)}
+        style={styles.percentageInSquare}>
+
+          <Feather name="percent" size={24} color="black" />
+
+      </TouchableOpacity>
       <Image source={
           require('./img/Deadlift.png')} 
           style={{  width: 120,
@@ -247,6 +336,55 @@ const styles = StyleSheet.create({
   margin: 10,
   borderRadius: 5,
   
+  },
+  percentageInSquare:{
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    zIndex: 2
+  },
+  percentageStyle:{
+    position: 'absolute', 
+    flexDirection: 'row', 
+    zIndex: 3, 
+    backgroundColor: 'white',
+    padding: 15,
+    shadowColor: 'black', 
+    shadowOffset: { 
+      width: 0, 
+      height: 11 },
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    elevation: 20,
+    borderRadius: 5,
+    top: '20%',
+    right: '4%',
+  },
+  closeButton:{
+    position: 'absolute',
+    right: 0,
+    top: -40,
+    borderRadius: 45,
+    shadowColor: 'black', 
+    width: 40,
+    height: 40,
+    shadowOffset: { 
+      width: 0, 
+      height: 11 },
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    elevation: 4,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   input: {
   width: '50%',
