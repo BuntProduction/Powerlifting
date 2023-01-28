@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "SBD Perf v0.5.0",
+    "name": "SBD Perf v0.5.3",
     "slug": "Powerlifting",
-    "version": "0.5.0",
+    "version": "0.5.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -26,7 +26,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.bunt.Powerlifting",
-      "versionCode": 2
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"

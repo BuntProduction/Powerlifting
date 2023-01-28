@@ -42,7 +42,10 @@ const App = () => {
         shadowOpacity: 1,
         shadowRadius: 16,
       }
-    }}>
+    }}
+    unmountOnBlur={false}
+    initialNavigationState={{ routes: [{ name: 'Home' }, { name: 'SBD' }, { name: 'Streetlifting' }, { name: 'Weight' }, { name: 'Settings' }] }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}

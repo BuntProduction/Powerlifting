@@ -15,37 +15,64 @@ const SettingsScreen = () => {
   setOneRm(calculatedOneRm);
   }
 
+  const weightInputRef = React.useRef(null);
+  const repetitionsInputRef = React.useRef(null);
+
+  const handleWeightPress = () => {
+    weightInputRef.current.focus();
+  };
+  const handleRepetitionsPress = () => {
+    repetitionsInputRef.current.focus();
+  };
 
   return (
     <View style={styles.container}>
-      <StatusBar />
       <Image source={
           require('./img/SBDPerf4.png')} 
           style={{  width: 140,
             height: 140,
-            resizeMode: 'contain',
-            marginTop: '-10%'
+            marginTop: '-7.6%',
+            position: 'absolute',
+            top: 0
                 }}/>
 
-
-<View>
-      <Text>Enter weight:</Text>
-      <TextInput
-        value={weight}
-        onChangeText={text => setWeight(text)}
-      />
-
-        <Text>Enter repetitions:</Text>
+    <Text style={styles.titleCalculator}>1 Rep Max Calculator</Text>
+    <View style={styles.containerItems}>
+    <View style={styles.InputContainerContainer}>    
+      <TouchableOpacity style={styles.inputContainer} onPress={handleWeightPress}>
+        
+        <Text style={styles.textEnter}>Enter weight:</Text>
         <TextInput
-          value={repetitions}
-          onChangeText={text => setRepetitions(text)}
+          ref={weightInputRef}
+          defaultValue={'0'}
+          onFocus={() => setWeight('')}
+          onChangeText={text => setWeight(text)}
+          style={styles.inputNumber}
+          keyboardType='numeric'
         />
-        <Button
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.inputContainer} onPress={handleRepetitionsPress}>
+        <Text style={styles.textEnter}>Enter repetitions:</Text>
+        <TextInput
+          ref={repetitionsInputRef}
+          defaultValue={'0'}
+          onFocus={() => setRepetitions('')}
+          onChangeText={text => setRepetitions(text)}
+          style={styles.inputNumber}
+          keyboardType='numeric'
+        />
+      </TouchableOpacity>
+      </View>
+
+        <TouchableOpacity
           title="Calculate"
           onPress={() => calculateOneRm()}
-        />
-        <Text>One Rep Max: {oneRm}</Text>
-        </View>
+          style={styles.calculateButton}
+        ><Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center'}}>Calculate</Text></TouchableOpacity>
+        <Text style={styles.oneRepMaxText}>One Rep Max: <Text style={styles.oneRmResult}>{parseFloat(oneRm ? oneRm : '0').toFixed(1)}</Text></Text>
+        
+      </View>
 
     </View>
   );
@@ -53,11 +80,78 @@ const SettingsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-  flex: 1,
-  flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  titleCalculator:{
+    fontSize: 30,
+    marginBottom: '15%',
+    fontWeight: 'bold',
+    
+  },
+  containerItems:{
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  inputContainerContainer:{
+  flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'white'
+  width: '100%',
+  },
+  inputContainer:{
+    shadowColor: 'black',
+      shadowOffset: { 
+        width: 0, 
+        height: 11 },
+      shadowOpacity: 0.16,
+     shadowRadius: 16,
+      elevation: 4,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      padding: '3%',
+      margin: '1%',
+      borderRadius: 5
+  },
+  textEnter:{
+    fontSize: 20,
+  },
+  oneRepMaxText:{
+    fontSize: 20,
+  },
+  oneRmResult:{
+    fontWeight: 'bold',
+
+  },
+  inputNumber:{
+    fontSize: 20, 
+    width: 50, 
+    textAlign: 'center', 
+    fontWeight: 'bold'
+  },
+  calculateButton:{
+    marginTop: '5%',
+    padding: 10,
+    width: '30%',
+    shadowColor: 'black',
+      shadowOffset: { 
+        width: 0, 
+        height: 11 },
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    elevation: 4,
+    width: '30%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    marginBottom: '5%',
+    borderRadius: 45,
+
   },
 })
 
