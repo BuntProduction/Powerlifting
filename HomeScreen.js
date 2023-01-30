@@ -117,15 +117,22 @@ const HomeScreen = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisible2, setIsModalVisible2] = useState(false);
     const [isModalVisible3, setIsModalVisible3] = useState(false);
+
     const toggleModal = () => {
       setIsModalVisible(!isModalVisible);
-      };
+      setIsModalVisible2(false);
+      setIsModalVisible3(false);
+    };
     const toggleModal2 = () => {
-        setIsModalVisible2(!isModalVisible2);
-        };
+      setIsModalVisible2(!isModalVisible2);
+      setIsModalVisible(false);
+      setIsModalVisible3(false);
+      };
     const toggleModal3 = () => {
-          setIsModalVisible3(!isModalVisible3);
-          };
+      setIsModalVisible3(!isModalVisible3);
+      setIsModalVisible2(false);
+      setIsModalVisible(false);
+      };
 
 
   return (
@@ -181,7 +188,7 @@ const HomeScreen = () => {
             <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
               <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
-                <Text style={{ fontSize: 18}}>{percentage}% <Text style={{fontWeight: 'bold',}}>{(deadlift * percentage) / 100}</Text></Text>
+                <Text style={{ fontSize: 18}}>{percentage}%           <Text style={{fontWeight: 'bold',}}>{(deadlift * percentage) / 100}</Text></Text>
                 
               </View>
             ))}
@@ -197,7 +204,7 @@ const HomeScreen = () => {
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleSquatPress}>
       
       <TouchableOpacity
-        onPress={() => setIsModalVisible(!isModalVisible)}
+        onPress={toggleModal}
         style={styles.percentageInSquare}>
 
           <Feather name="percent" size={24} color="black" />
@@ -225,7 +232,7 @@ const HomeScreen = () => {
 
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleBenchPress}>
       <TouchableOpacity
-        onPress={() => setIsModalVisible2(!isModalVisible2)}
+        onPress={toggleModal2}
         style={styles.percentageInSquare}>
 
           <Feather name="percent" size={24} color="black" />
@@ -250,7 +257,7 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <TouchableOpacity style={[styles.square, { width: squareSize, height: squareSize, aspectRatio: 1 }]} onPress={handleDeadliftPress}>
       <TouchableOpacity
-        onPress={() => setIsModalVisible3(!isModalVisible3)}
+        onPress={toggleModal3}
         style={styles.percentageInSquare}>
 
           <Feather name="percent" size={24} color="black" />

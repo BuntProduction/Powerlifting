@@ -25,13 +25,13 @@ const Weight = () => {
   
     useEffect(() => {
       AsyncStorage.getItem('data3').then(data3 => {
-          if(data3){
-            setData3(JSON.parse(data3));
-            setShowLineChart3(true);
-            
-          }else{
-            setData3([]);
-          }
+        if(data3 && data3.length > 0){
+          setData3(JSON.parse(data3));
+          setShowLineChart3(true);
+      }else{
+          setData3([]);
+          setShowLineChart3(false);
+      }
       });
     }, []);
   

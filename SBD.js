@@ -234,7 +234,7 @@ import React, {
     if (maxSquat >= 50) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -256,7 +256,7 @@ import React, {
     if (maxSquat >= 100) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -278,7 +278,7 @@ import React, {
     if (maxSquat >= 150) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -300,7 +300,7 @@ import React, {
     if (maxSquat >= 200) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -322,7 +322,7 @@ import React, {
     if (maxSquat >= 225) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -367,7 +367,7 @@ import React, {
     if (maxBench >= 50) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -389,7 +389,7 @@ import React, {
     if (maxBench >= 80) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -411,7 +411,7 @@ import React, {
     if (maxBench >= 100) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -433,7 +433,7 @@ import React, {
     if (maxBench >= 130) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -455,7 +455,7 @@ import React, {
     if (maxBench >= 150) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -500,7 +500,7 @@ import React, {
     if (maxDeadlift >= 50) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -522,7 +522,7 @@ import React, {
     if (maxDeadlift >= 100) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -544,7 +544,7 @@ import React, {
     if (maxDeadlift >= 150) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -566,7 +566,7 @@ import React, {
     if (maxDeadlift >= 200) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
@@ -588,7 +588,7 @@ import React, {
     if (maxDeadlift >= 250) {
       return 1;
     } else {
-      return 0.2;
+      return 0.15;
     }
   }
   
