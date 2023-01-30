@@ -32,15 +32,15 @@ import React, {
   
     useEffect(() => {
       AsyncStorage.getItem('data').then(data => {
-          if(data){
-            setData(JSON.parse(data));
-            setShowLineChart(true);
-            
+          if(data && data.length > 0){
+              setData(JSON.parse(data));
+              setShowLineChart(true);
           }else{
-            setData([]);
+              setData([]);
+              setShowLineChart(false);
           }
       });
-    }, []);
+  }, []);
   
     const [squat, setSquat] = useState('');
     const [bench, setBench] = useState('');

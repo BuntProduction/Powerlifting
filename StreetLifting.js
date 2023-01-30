@@ -28,14 +28,15 @@ import React, {
   
     useEffect(() => {
       AsyncStorage.getItem('data2').then(data2 => {
-          if(data2){
-            setData2(JSON.parse(data2));
-            setShowLineChart2(true);
+          if(data2 && data2.length > 0){
+              setData2(JSON.parse(data2));
+              setShowLineChart2(true);
           }else{
-            setData2([]);
+              setData2([]);
+              setShowLineChart2(false);
           }
       });
-    }, []);
+  }, []);
   
     const [dips, setDips] = useState('');
     const [traction, setTraction] = useState('');

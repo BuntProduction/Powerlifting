@@ -40,9 +40,11 @@ const Weight = () => {
     
     useEffect(() => {
       AsyncStorage.getItem('weight').then(value => {
-          if(value){
-            setWeight(value);
-          }
+        if(value){
+          setWeight(value);
+        }else{
+          setWeight('');
+        }
       });
     }, []);
     

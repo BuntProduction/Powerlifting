@@ -142,11 +142,11 @@ const HomeScreen = () => {
 
       {isModalVisible && (
           <View style={styles.percentageStyle}>
-          <View style={{ width: '50%', height: '60%' }}>
+          <View style={{ width: '100%', height: '60%' , }}>
             <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
-              <View key={percentage}>
-                <Text>{percentage}% <Text>{(squat * percentage) / 100}</Text></Text>
+              <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
+                <Text style={{ fontSize: 18}}>{percentage}%           <Text  style={{fontWeight: 'bold',}}>{(squat * percentage) / 100}</Text></Text>
                 
               </View>
             ))}
@@ -159,11 +159,12 @@ const HomeScreen = () => {
 
 {isModalVisible2 && (
           <View style={styles.percentageStyle}>
-          <View style={{ width: '50%', height: '60%' }}>
+          <View style={{ width: '100%', height: '60%' , }}>
             <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
+            
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
-              <View key={percentage}>
-                <Text>{percentage}% <Text>{(bench * percentage) / 100}</Text></Text>
+              <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
+                <Text style={{ fontSize: 18}}>{percentage}%           <Text style={{fontWeight: 'bold',}}>{(bench * percentage) / 100}</Text></Text>
                 
               </View>
             ))}
@@ -176,11 +177,11 @@ const HomeScreen = () => {
 
 {isModalVisible3 && (
           <View style={styles.percentageStyle}>
-          <View style={{ width: '50%', height: '60%' }}>
+          <View style={{ width: '100%', height: '60%' , }}>
             <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
-              <View key={percentage}>
-                <Text>{percentage}% <Text>{(deadlift * percentage) / 100}</Text></Text>
+              <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
+                <Text style={{ fontSize: 18}}>{percentage}% <Text style={{fontWeight: 'bold',}}>{(deadlift * percentage) / 100}</Text></Text>
                 
               </View>
             ))}
@@ -361,8 +362,10 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     elevation: 20,
     borderRadius: 5,
+    width: '50%',
     top: '20%',
     right: '4%',
+    
   },
   closeButton:{
     position: 'absolute',
