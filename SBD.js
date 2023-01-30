@@ -732,7 +732,7 @@ import React, {
                   
                   <View
                     style={{
-                      width: `${( maxValues.bench / inputValueBench ) * 100}%`,
+                      width: `${(inputValueBench < maxValues.bench ? inputValueBench : maxValues.bench) / inputValueBench * 100}%`,
                       height: 10,
                       backgroundColor: '#fca11c',
                       borderRadius: 10
@@ -768,7 +768,7 @@ import React, {
                   <View style={styles.progressBarContainer}>
                   <View
                     style={{
-                      width: `${( maxValues.deadlift / inputValueDeadlift ) * 100}%`,
+                      width: `${(inputValueDeadlift < maxValues.deadlift ? inputValueDeadlift : maxValues.deadlift) / inputValueDeadlift * 100}%`,
                       height: 10,
                       backgroundColor: '#fca11c',
                       borderRadius: 10,

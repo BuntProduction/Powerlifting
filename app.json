@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "SBD Perf v0.6",
+    "name": "SBD Perf v0.6.1",
     "slug": "Powerlifting",
-    "version": "0.6",
+    "version": "0.6.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

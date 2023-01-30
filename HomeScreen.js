@@ -153,7 +153,7 @@ const HomeScreen = () => {
             <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
               <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
-                <Text style={{ fontSize: 18}}>{percentage}%           <Text  style={{fontWeight: 'bold',}}>{(squat * percentage) / 100}</Text></Text>
+                <Text style={{ fontSize: 18}}>{percentage}%      <Text  style={{fontWeight: 'bold',}}>{(squat * percentage) / 100} kg</Text></Text>
                 
               </View>
             ))}
@@ -171,7 +171,7 @@ const HomeScreen = () => {
             
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
               <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
-                <Text style={{ fontSize: 18}}>{percentage}%           <Text style={{fontWeight: 'bold',}}>{(bench * percentage) / 100}</Text></Text>
+                <Text style={{ fontSize: 18}}>{percentage}%      <Text style={{fontWeight: 'bold',}}>{(bench * percentage) / 100} kg</Text></Text>
                 
               </View>
             ))}
@@ -188,7 +188,7 @@ const HomeScreen = () => {
             <Text style={{fontSize: 19, fontWeight: 'bold', width: '150%', marginBottom: 8}}>Percentages</Text>
             {Array.from({length:11}, (_,i) => (i*5)+50).map(percentage => (
               <View key={percentage} style={{padding: '4%',borderBottomWidth: 1, borderBottomColor: 'lightgray'}}>
-                <Text style={{ fontSize: 18}}>{percentage}%           <Text style={{fontWeight: 'bold',}}>{(deadlift * percentage) / 100}</Text></Text>
+                <Text style={{ fontSize: 18}}>{percentage}%      <Text style={{fontWeight: 'bold',}}>{(deadlift * percentage) / 100} kg</Text></Text>
                 
               </View>
             ))}

@@ -70,7 +70,7 @@ const SettingsScreen = () => {
           onPress={() => calculateOneRm()}
           style={styles.calculateButton}
         ><Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center'}}>Calculate</Text></TouchableOpacity>
-        <Text style={styles.oneRepMaxText}>One Rep Max: <Text style={styles.oneRmResult}>{parseFloat(oneRm ? oneRm : '0').toFixed(1)}</Text></Text>
+        <Text style={styles.oneRepMaxText}>One Rep Max: <Text style={styles.oneRmResult}>{parseFloat(oneRm ? oneRm : '0').toFixed(1)} kg</Text></Text>
         
       </View>
 
