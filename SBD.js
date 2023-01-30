@@ -1225,7 +1225,7 @@ import React, {
       shadowOffset: { width: 0, height: 11 },
       shadowOpacity: 1,
       shadowRadius: 16,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
       
     },
     tableRow2:{
@@ -1243,7 +1243,8 @@ import React, {
       shadowOpacity: 1,
       shadowRadius: 16,
       backgroundColor: 'white',
-      marginRight: 10
+      marginRight: 10,
+      marginBottom: '1%'
     },
     tableCell:{
       padding: 1,

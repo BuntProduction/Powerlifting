@@ -289,6 +289,7 @@ const styles = StyleSheet.create({
       shadowRadius: 16,
       backgroundColor: 'white',
       marginRight: '10%',
+      marginBottom: '1%'
     
   },
   tableRow1: {
@@ -306,7 +307,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 16,
     backgroundColor: 'white',
-    marginBottom: 5
   },
   tableCell:{
     padding: 5,

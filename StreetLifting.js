@@ -416,7 +416,8 @@ import React, {
       shadowOpacity: 1,
       shadowRadius: 16,
       backgroundColor: 'white',
-      marginRight: '2%'
+      marginRight: '2%',
+      marginBottom: '1%'
     },
     tableCell:{
       marginLeft: -4,
